@@ -92,11 +92,11 @@ if (hasEngineFlags && !args.includes("--global") && !args.includes("-g") && !arg
 
   const sourceSkill = path.join(__dirname, "..", "skill");
 
+  console.log(`\n✅ UI/UX Ultra v1.0.0 (by ToolNPlay.com & Pardeep Kumar) successfully installed to:`);
   for (const targetBase of targets) {
     fs.mkdirSync(targetBase, { recursive: true });
     fs.cpSync(sourceSkill, targetBase, { recursive: true });
-    console.log(`\n✅ UI/UX Ultra v1.0.0 (by ToolNPlay.com & Pardeep Kumar) installed to:`);
-    console.log(`   ${targetBase}`);
+    console.log(`   • ${targetBase}`);
   }
   console.log(`\n🎉 Skill is ready! In Antigravity, simply ask: "Build a SaaS app using ui-ux-ultra"\n`);
 }
