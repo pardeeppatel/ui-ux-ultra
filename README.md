@@ -214,9 +214,9 @@ Each category contains **5 curated design families**, with mathematically couple
 
 ---
 
-## 📊 Comparison: `ui-ux-ultra` vs. Alternatives
+## 📊 Why UI/UX Ultra? (Comparison with Other Approaches)
 
-| Capability / Dimension | Raw AI Prompts *(Default Claude/GPT)* | Web Generators *(Coolors/Adobe)* | `UI/UX Pro Max` | **`ui-ux-ultra` v1.0.0** |
+| Capability / Dimension | Raw LLM Prompts *(Default AI Output)* | Web Color Pickers | Static Prompt Skills | **UI/UX Ultra v1.0.0** |
 | :--- | :---: | :---: | :---: | :---: |
 | **In-Chat Live Interactive Preview** | ❌ None | ❌ None | ❌ None | **✅ Live Embed with Mode Toggles** |
 | **All Category Alternatives Listed** | ❌ None | ❌ None | ⚠️ Partial/Random | **✅ Complete Category Visibility** |
@@ -226,7 +226,7 @@ Each category contains **5 curated design families**, with mathematically couple
 | **Flutter Material 3 Code** | ❌ Manual boilerplate | ❌ None | ⚠️ Advice only | **✅ Direct `flutter_theme.dart`** |
 | **SwiftUI iOS HIG Code** | ❌ Manual boilerplate | ❌ None | ⚠️ Advice only | **✅ Direct `Theme.swift`** |
 | **Standalone CLI (`npx`)** | ❌ None | ❌ None | ❌ None | **✅ Zero-Dependency Terminal Tool** |
-| **Built-in UX Laws & 8pt Grid** | ❌ None | ❌ None | ✅ Yes | **✅ Yes (Enforced in Code)** |
+| **Built-in UX Laws & 8pt Grid** | ❌ None | ❌ None | ⚠️ Theory only | **✅ Yes (Enforced in Code)** |
 
 ---
 
