@@ -15,7 +15,8 @@ Usage:
   npx ui-ux-ultra [options]
 
 Options:
-  --global, -g     Install globally to ~/.gemini/antigravity/skills/ui-ux-ultra
+  --global, -g     Install globally to ~/.gemini/config/skills/ui-ux-ultra
+  --update, -u     Update existing installation to the latest version
   --cursor         Install to .cursor/skills/ui-ux-ultra
   --claude         Install to .claude/skills/ui-ux-ultra
   --gemini         Install to .gemini/skills/ui-ux-ultra
@@ -74,10 +75,19 @@ if (hasEngineFlags && !args.includes("--global") && !args.includes("-g") && !arg
   const homeDir = process.env.HOME || process.env.USERPROFILE;
   const targets = [];
 
-  if (args.includes("--global") || args.includes("-g")) {
+  const isUpdate = args.includes("--update") || args.includes("-u");
+  if (args.includes("--global") || args.includes("-g") || isUpdate) {
     // Official Antigravity global custom skill discovery paths
     targets.push(path.join(homeDir, ".gemini", "config", "skills", "ui-ux-ultra"));
     targets.push(path.join(homeDir, ".gemini", "antigravity", "skills", "ui-ux-ultra"));
+    
+    // Also update local workspace if it was previously installed there
+    const localAgents = path.join(process.cwd(), ".agents", "skills", "ui-ux-ultra");
+    const localCursor = path.join(process.cwd(), ".cursor", "skills", "ui-ux-ultra");
+    const localClaude = path.join(process.cwd(), ".claude", "skills", "ui-ux-ultra");
+    if (fs.existsSync(localAgents)) targets.push(localAgents);
+    if (fs.existsSync(localCursor)) targets.push(localCursor);
+    if (fs.existsSync(localClaude)) targets.push(localClaude);
   } else if (args.includes("--cursor")) {
     targets.push(path.join(process.cwd(), ".cursor", "skills", "ui-ux-ultra"));
   } else if (args.includes("--claude")) {
@@ -91,8 +101,9 @@ if (hasEngineFlags && !args.includes("--global") && !args.includes("-g") && !arg
   }
 
   const sourceSkill = path.join(__dirname, "..", "skill");
+  const actionWord = isUpdate ? "updated" : "installed";
 
-  console.log(`\n✅ UI/UX Ultra v1.0.0 (by ToolNPlay.com & Pardeep Kumar) successfully installed to:`);
+  console.log(`\n✅ UI/UX Ultra v1.0.0 (by ToolNPlay.com & Pardeep Kumar) successfully ${actionWord} to:`);
   for (const targetBase of targets) {
     fs.mkdirSync(targetBase, { recursive: true });
     fs.cpSync(sourceSkill, targetBase, { recursive: true });
