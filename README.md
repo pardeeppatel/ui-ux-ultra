@@ -37,42 +37,75 @@ Most AI-generated web and mobile interfaces look identical: generic Tailwind blu
 
 ## 🚀 Complete Installation Guide
 
-Install UI/UX Ultra in seconds across any environment using `npx`:
+> **📍 Where do I run these commands?**  
+> Open your computer's **Terminal** (macOS/Linux) or **PowerShell** (Windows), or open the integrated terminal in your code editor (**VS Code, Cursor, Windsurf**) using the shortcut ``Ctrl + ` `` or ``Cmd + ` ``.
 
-### 1. For Google Antigravity
+---
+
+### Method A: One-Liner via GitHub (Instant, No Clone Needed)
+
+You can run and install UI/UX Ultra directly from GitHub without cloning the repo:
+
+#### 1. For Google Antigravity
 To install globally across all workspaces and agent sessions:
 ```bash
-npx ui-ux-ultra --global
-# or -g
+npx github:pardeeppatel/ui-ux-ultra --global
 ```
 To install strictly within your current workspace:
 ```bash
-npx ui-ux-ultra --gemini
+npx github:pardeeppatel/ui-ux-ultra --gemini
 ```
 
-### 2. For Cursor
+#### 2. For Cursor
 Installs directly to `.cursor/skills/ui-ux-ultra`:
 ```bash
-npx ui-ux-ultra --cursor
+npx github:pardeeppatel/ui-ux-ultra --cursor
 ```
 
-### 3. For Claude Code
+#### 3. For Claude Code
 Installs directly to `.claude/skills/ui-ux-ultra`:
 ```bash
-npx ui-ux-ultra --claude
+npx github:pardeeppatel/ui-ux-ultra --claude
 ```
 
-### 4. For Windsurf / Cline / Roo Code / Generic Agents
+#### 4. For Windsurf / Cline / Roo Code / Generic Agents
 Installs directly to `.agents/skills/ui-ux-ultra`:
 ```bash
-npx ui-ux-ultra --agents
+npx github:pardeeppatel/ui-ux-ultra --agents
 ```
 
-### 5. Standalone Terminal / CLI (No AI Required)
+---
+
+### Method B: Via npm (Once Published)
+If installed via the npm registry:
+```bash
+npx ui-ux-ultra --global   # Antigravity global
+npx ui-ux-ultra --cursor   # Cursor
+npx ui-ux-ultra --claude   # Claude Code
+npx ui-ux-ultra --agents   # Windsurf / Cline
+```
+
+---
+
+### Method C: Clone & Run Locally
+```bash
+git clone https://github.com/pardeeppatel/ui-ux-ultra.git
+cd ui-ux-ultra
+
+# Install globally:
+node bin/cli.js --global
+
+# Or launch the interactive preview studio:
+node bin/cli.js --preview
+```
+
+---
+
+### Standalone Terminal / CLI (No AI Required)
 You don't need an AI agent to use UI/UX Ultra. Run it as an independent CLI in any terminal:
 ```bash
 # Query any industry or aesthetic keywords and compile tokens:
-npx ui-ux-ultra "travel saas" --category travel --persist --audit
+npx github:pardeeppatel/ui-ux-ultra "travel saas" --category travel --persist --audit
 ```
 
 ---
