@@ -4,59 +4,59 @@
 
 /* ==========================================================================
    UI-UX-ULTRA v3.5 — SHADCN UI COMPATIBLE GLOBALS.CSS
-   Family: travel-bharat-nomad
+   Family: saas-linear-indigo
    ========================================================================== */
 
 @layer base {
   :root {
-    --background: #FDFBF7;
-    --foreground: #241914;
-    --card: #F4EFE6;
-    --card-foreground: #241914;
-    --popover: #F4EFE6;
-    --popover-foreground: #241914;
-    --primary: #C85A32;
-    --primary-foreground: #0B0F19;
-    --secondary: #FFFFFF;
-    --secondary-foreground: #241914;
-    --muted: #FFFFFF;
-    --muted-foreground: #6E5A4F;
-    --accent: #FFFFFF;
-    --accent-foreground: #241914;
+    --background: #F8FAFC;
+    --foreground: #0B0F19;
+    --card: #FFFFFF;
+    --card-foreground: #0B0F19;
+    --popover: #FFFFFF;
+    --popover-foreground: #0B0F19;
+    --primary: #4F46E5;
+    --primary-foreground: #FFFFFF;
+    --secondary: #F1F5F9;
+    --secondary-foreground: #0B0F19;
+    --muted: #F1F5F9;
+    --muted-foreground: #475569;
+    --accent: #F1F5F9;
+    --accent-foreground: #0B0F19;
     --destructive: #DC2626;
     --destructive-foreground: #FFFFFF;
-    --border: #E6DEC8;
-    --input: #E6DEC8;
-    --ring: #C85A32;
+    --border: #E2E8F0;
+    --input: #E2E8F0;
+    --ring: #4F46E5;
     --radius: 0.625rem;
-    --chart-1: #C85A32;
-    --chart-2: #0F766E;
+    --chart-1: #4F46E5;
+    --chart-2: #0D9488;
     --chart-3: #F59E0B;
     --chart-4: #10B981;
     --chart-5: #6366F1;
   }
 
   .dark, [data-theme="dark"] {
-    --background: #0E0A08;
-    --foreground: #FAF5EE;
-    --card: #18120E;
-    --card-foreground: #FAF5EE;
-    --popover: #18120E;
-    --popover-foreground: #FAF5EE;
-    --primary: #E07A5F;
-    --primary-foreground: #08090C;
-    --secondary: #241B15;
-    --secondary-foreground: #FAF5EE;
-    --muted: #241B15;
-    --muted-foreground: #A68E80;
-    --accent: #241B15;
-    --accent-foreground: #FAF5EE;
+    --background: #08090C;
+    --foreground: #F3F4F6;
+    --card: #11131A;
+    --card-foreground: #F3F4F6;
+    --popover: #11131A;
+    --popover-foreground: #F3F4F6;
+    --primary: #6366F1;
+    --primary-foreground: #FFFFFF;
+    --secondary: #1A1D27;
+    --secondary-foreground: #F3F4F6;
+    --muted: #1A1D27;
+    --muted-foreground: #8A94A6;
+    --accent: #1A1D27;
+    --accent-foreground: #F3F4F6;
     --destructive: #EF4444;
     --destructive-foreground: #FFFFFF;
-    --border: #362820;
-    --input: #362820;
-    --ring: #E07A5F;
-    --chart-1: #E07A5F;
+    --border: #222634;
+    --input: #222634;
+    --ring: #6366F1;
+    --chart-1: #6366F1;
     --chart-2: #14B8A6;
     --chart-3: #FBBF24;
     --chart-4: #34D399;

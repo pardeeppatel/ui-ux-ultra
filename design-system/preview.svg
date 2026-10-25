@@ -1,45 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 250" width="100%" style="border-radius:14px; background:#0E0A08; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 250" width="100%" style="border-radius:14px; background:#08090C; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
   <!-- Recommended Main Card -->
   <g transform="translate(20, 20)">
-    <rect width="380" height="210" rx="14" fill="#18120E" stroke="#362820" stroke-width="1"/>
+    <rect width="380" height="210" rx="14" fill="#11131A" stroke="#222634" stroke-width="1"/>
     <rect x="1" y="1" width="378" height="1" fill="rgba(255,255,255,0.12)"/>
-    <rect x="24" y="22" width="120" height="22" rx="5" fill="#E07A5F22" stroke="#E07A5F" stroke-width="1"/>
-    <text x="32" y="37" fill="#E07A5F" font-size="10" font-weight="700" letter-spacing="0.05em">RECOMMENDED</text>
-    <text x="24" y="72" fill="#FAF5EE" font-size="18" font-weight="700">Grand Trunk Terracotta & Peacock</text>
-    <text x="24" y="94" fill="#A68E80" font-size="12">india-travel transit train bus vlog heritage</text>
+    <rect x="24" y="22" width="120" height="22" rx="5" fill="#6366F122" stroke="#6366F1" stroke-width="1"/>
+    <text x="32" y="37" fill="#6366F1" font-size="10" font-weight="700" letter-spacing="0.05em">RECOMMENDED</text>
+    <text x="24" y="72" fill="#F3F4F6" font-size="18" font-weight="700">Linear Obsidian & Indigo</text>
+    <text x="24" y="94" fill="#8A94A6" font-size="12">modern precision command-bar developer b2b</text>
     
     <!-- Primary CTA -->
-    <rect x="24" y="116" width="125" height="36" rx="8" fill="#E07A5F"/>
+    <rect x="24" y="116" width="125" height="36" rx="8" fill="#6366F1"/>
     <text x="48" y="139" fill="#ffffff" font-size="12" font-weight="600">Primary Action</text>
     
     <!-- Secondary Button -->
-    <rect x="160" y="116" width="110" height="36" rx="8" fill="#241B15" stroke="#362820" stroke-width="1"/>
-    <text x="182" y="139" fill="#FAF5EE" font-size="12">Secondary</text>
+    <rect x="160" y="116" width="110" height="36" rx="8" fill="#1A1D27" stroke="#222634" stroke-width="1"/>
+    <text x="182" y="139" fill="#F3F4F6" font-size="12">Secondary</text>
 
     <!-- Contrast Pill -->
     <circle cx="30" cy="180" r="4" fill="#10B981"/>
-    <text x="40" y="183" fill="#A68E80" font-size="11">WCAG AAA Pass (17.11:1 Contrast)</text>
+    <text x="40" y="183" fill="#8A94A6" font-size="11">WCAG AAA Pass (16.86:1 Contrast)</text>
   </g>
 
   <!-- Alternatives Column -->
   <g transform="translate(420, 20)">
-    <text x="0" y="14" fill="#A68E80" font-size="12" font-weight="600" letter-spacing="0.04em">OR SWITCH TO AN ALTERNATIVE:</text>
+    <text x="0" y="14" fill="#8A94A6" font-size="12" font-weight="600" letter-spacing="0.04em">OR SWITCH TO AN ALTERNATIVE:</text>
     <!-- Alternative 1 -->
     <g transform="translate(0, 26)">
-      <rect width="320" height="78" rx="10" fill="#18120E" stroke="#362820" stroke-width="1"/>
-      <circle cx="22" cy="28" r="7" fill="#38BDF8"/>
-      <text x="38" y="32" fill="#FAF5EE" font-size="13" font-weight="600">Alpine Glacier & Prayer Flag</text>
-      <text x="38" y="50" fill="#A68E80" font-size="11">trekking mountains ladakh camping rout...</text>
-      <rect x="235" y="24" width="70" height="28" rx="6" fill="#38BDF8"/>
+      <rect width="320" height="78" rx="10" fill="#11131A" stroke="#222634" stroke-width="1"/>
+      <circle cx="22" cy="28" r="7" fill="#7A73FF"/>
+      <text x="38" y="32" fill="#F3F4F6" font-size="13" font-weight="600">Stripe Mesh & Royal Slate</text>
+      <text x="38" y="50" fill="#8A94A6" font-size="11">payments enterprise billing clean elev...</text>
+      <rect x="235" y="24" width="70" height="28" rx="6" fill="#7A73FF"/>
       <text x="249" y="42" fill="#ffffff" font-size="11" font-weight="600">Select</text>
     </g>
     <!-- Alternative 2 -->
     <g transform="translate(0, 118)">
-      <rect width="320" height="78" rx="10" fill="#18120E" stroke="#362820" stroke-width="1"/>
-      <circle cx="22" cy="28" r="7" fill="#F43F5E"/>
-      <text x="38" y="32" fill="#FAF5EE" font-size="13" font-weight="600">Shinkansen Slate & Stamp Red</text>
-      <text x="38" y="50" fill="#A68E80" font-size="11">rail-pass metro ferry schedule timetab...</text>
-      <rect x="235" y="24" width="70" height="28" rx="6" fill="#F43F5E"/>
+      <rect width="320" height="78" rx="10" fill="#11131A" stroke="#222634" stroke-width="1"/>
+      <circle cx="22" cy="28" r="7" fill="#FFFFFF"/>
+      <text x="38" y="32" fill="#F3F4F6" font-size="13" font-weight="600">Geist Monochrome & Signal</text>
+      <text x="38" y="50" fill="#8A94A6" font-size="11">minimalist cloud edge deployment stark...</text>
+      <rect x="235" y="24" width="70" height="28" rx="6" fill="#FFFFFF"/>
       <text x="249" y="42" fill="#ffffff" font-size="11" font-weight="600">Select</text>
     </g>
   </g>

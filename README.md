@@ -35,11 +35,13 @@ Most AI-generated web and mobile interfaces look identical: generic Tailwind blu
 **UI/UX Ultra** is an active **Design System Compiler, UX Laws Enforcer, and Theme Engine** with **zero external dependencies**. It bridges high-end human design craftsmanship with autonomous AI coding agents:
 
 1. **200 Curated, Dual-Theme Palettes**: Across 20 distinct industry verticals (SaaS, FinTech, Healthcare, Travel, E-Commerce, DevTools, Cyberpunk Gaming, BioTech, etc.).
-2. **Interactive In-Chat Previews**: Live, clickable Generative UI cards rendered inside your AI chat to test themes and toggles before writing code.
-3. **Full Category Catalog Visibility**: Recommends the #1 primary palette while detailing **ALL available alternatives** in that vertical.
-4. **Zero Washed-Out Text Engine**: Mathematical luminance verification (`--elevated-foreground` and container-aware contrast) guaranteeing **WCAG 2.1 AAA compliance (up to 21:1)**.
-5. **High-Level Design Theory & 8 UX Laws**: Enforces Fitts's Law, Hick's Law, Miller's Law, Jakob's Law, Doherty Threshold, and an 8pt spatial grid.
-6. **Multi-Platform Code Generation**: Instantly emits production code for **Web (Tailwind v3/v4, Shadcn UI, CSS variables)**, **Flutter (Material 3)**, and **SwiftUI (iOS HIG)**.
+2. **Interactive In-Chat Previews & Blueprint Box**: Live, clickable Generative UI cards with dual-theme toggles, paired with structured ASCII/Markdown design system specification boxes.
+3. **Domain-Coupled Conversion Page Blueprints**: Pre-engineered 5-step conversion architectures tailored to the psychological conversion triggers of every vertical.
+4. **Metric-to-Chart Pattern Blueprints**: Semantic `--chart-1` through `--chart-5` data series mapped to area sparklines, OHLC depth bars, latency histograms, and checkout funnels.
+5. **Zero Washed-Out Text Engine**: Mathematical luminance verification (`--elevated-foreground` and container-aware contrast) guaranteeing **WCAG 2.1 AAA compliance (up to 21:1)**.
+6. **Pre-Delivery Production Craft Checklist**: Zero emoji icons (SVG only), tactile press physics (`active:scale-[0.98]`), resilient typography (`text-wrap: balance`), and mobile touch ergonomics.
+7. **High-Level Design Theory & 8 UX Laws**: Enforces Fitts's Law, Hick's Law, Miller's Law, Jakob's Law, Doherty Threshold, and an 8pt spatial grid.
+8. **Multi-Platform Code Generation**: Instantly emits production code for **Web (Tailwind v3/v4, Shadcn UI, CSS variables)**, **Flutter (Material 3)**, and **SwiftUI (iOS HIG)**.
 
 ---
 
@@ -270,6 +272,49 @@ Each category contains **5 curated design families**, with mathematically couple
 | **SwiftUI iOS HIG Code** | ❌ Manual boilerplate | ❌ None | ⚠️ Advice only | **✅ Direct `Theme.swift`** |
 | **Standalone CLI (`npx`)** | ❌ None | ❌ None | ❌ None | **✅ Zero-Dependency Terminal Tool** |
 | **Built-in UX Laws & 8pt Grid** | ❌ None | ❌ None | ⚠️ Theory only | **✅ Yes (Enforced in Code)** |
+| **Domain Conversion Page Blueprints** | ❌ Generic layouts | ❌ None | ⚠️ Basic suggestions | **✅ 5-Step Section Architectures (20 Domains)** |
+| **Metric-to-Chart Data-Viz Series** | ❌ Random colors | ❌ None | ❌ None | **✅ Mapped to `--chart-1` through `--chart-5`** |
+| **Pre-Delivery Production Craft Checklist** | ❌ None | ❌ None | ❌ None | **✅ Strict SVG, Tactile & Text-Wrap Rules** |
+
+---
+
+## 📐 Domain-Coupled Conversion Page Blueprints
+
+High-converting user experiences depend on section architectures tailored to the psychological trigger of each domain. UI/UX Ultra automatically generates 5-step conversion section blueprints for every project:
+
+* **SaaS & B2B**: Command Hero with Telemetry Pill → Interactive Bento Matrix → Live API Terminal Playground → Uptime Telemetry & Logos → Tiered Pricing Matrix + Sticky Bottom Conversion Bar.
+* **Fintech & Crypto**: Real-Time Asset Ticker Hero → Bento Metrics (Yield, AUM, SOC-2/FINRA) → Fee Comparison Simulator → Cold Storage Architecture → Biometric App QR Signup.
+* **AI & Chatbots**: Live Prompt Playground Hero → Latency Benchmark Telemetry (vs Frontier Models) → Pre-built Agent Workflow Templates → Zero Data-Retention Guarantee → API Key Token Calculator.
+* **Healthcare & Telehealth**: Calming Specialist Search Hero → Clinical Services Directory with Transparent Pricing → Board-Certified Physician Credentials → Insurance Eligibility Checker → 24/7 Emergency Triage Hotline.
+* **E-Commerce & Retail**: Full-Bleed Seasonal Drop Hero → Curated Lookbook Grid with Quick-View → Social Proof Customer Styled Looks → Material Provenance Breakdown → 1-Click Express Checkout Bag.
+* *(Full blueprints for all 20 categories available in `skill/SKILL.md`)*.
+
+---
+
+## 📊 Metric-to-Chart Pattern Blueprints
+
+When building analytics dashboards, data visualization must map directly to the domain's core metric architecture. UI/UX Ultra configures 5 semantic chart tokens (`--chart-1` through `--chart-5`) paired to specific chart types:
+
+* **SaaS**: Area Sparkline (Throughput / Requests/sec) & Segmented Ring (Resource Utilization)
+* **Fintech & Crypto**: Candlestick / OHLC Chart with Volume Histogram & Order Book Depth Area
+* **AI Platforms**: Token Generation Velocity Line & Latency Distribution Histogram (P50/P90/P99)
+* **Dev Tools**: Build Duration Stepline & Test Matrix Pass/Fail Heatmap Grid
+* **Healthcare**: Continuous Vitals Biometric Waveform & Medication Adherence Donut
+* **E-Commerce**: Daily GMV Revenue Trend Bar & Checkout Funnel Step Area (Drop-off Analysis)
+
+---
+
+## 🛡️ Pre-Delivery Production Craft Checklist
+
+Before finalizing any user interface, verify every item against this strict production-grade craft checklist:
+
+- [ ] **Zero Emoji Icons**: Strictly use clean SVG icons (Lucide, Heroicons, Phosphor). Never render Unicode emojis (e.g. 🚀, ⚡, 💡) as UI icons or button decorators.
+- [ ] **Tactile Press Feedback**: Every interactive button, chip, and card must include `active:scale-[0.98]` and `cursor-pointer` with transition timing `duration-150 ease-out`.
+- [ ] **Resilient Typography**: Headings must use `text-wrap: balance` to prevent awkward single-word orphans; containers must feature overflow-safe wrapping (`break-words`, `overflow-hidden` where appropriate).
+- [ ] **Mobile-First Touch Ergonomics**: Minimum touch bounding boxes of **44x44pt on iOS** and **48x48dp on Android/Web**; primary mobile CTAs anchored within thumb-accessible zones.
+- [ ] **Dynamic Contrast Enforced**: All badge chips, elevated cards, and mode toggles must use `--elevated-foreground` rather than hardcoded light/dark text classes, guaranteeing **WCAG AAA (>7:1)** contrast across both themes.
+- [ ] **Zero-Flash Theme Switching**: Ensure inline script initializes `data-theme` before page render, avoiding white-screen flashes during dark mode loads.
+- [ ] **Semantic Token Discipline**: All colors reference `--bg-canvas`, `--bg-surface`, `--bg-elevated`, `--text-primary`, `--accent-primary`, and `--border-color`. Zero raw hex values in application stylesheets.
 
 ---
 

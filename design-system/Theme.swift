@@ -1,28 +1,28 @@
 // UI/UX Ultra v3.5 — SwiftUI Multi-Platform Theme
-// Family: travel-bharat-nomad | Category: travel
+// Family: saas-linear-indigo | Category: saas
 import SwiftUI
 
 public struct AppTheme {
   public struct Light {
-    public static let canvas = Color(hex: "#FDFBF7")
-    public static let surface = Color(hex: "#F4EFE6")
-    public static let elevated = Color(hex: "#FFFFFF")
-    public static let textPrimary = Color(hex: "#241914")
-    public static let textMuted = Color(hex: "#6E5A4F")
-    public static let accent = Color(hex: "#C85A32")
-    public static let secondary = Color(hex: "#0F766E")
-    public static let border = Color(hex: "#E6DEC8")
+    public static let canvas = Color(hex: "#F8FAFC")
+    public static let surface = Color(hex: "#FFFFFF")
+    public static let elevated = Color(hex: "#F1F5F9")
+    public static let textPrimary = Color(hex: "#0B0F19")
+    public static let textMuted = Color(hex: "#475569")
+    public static let accent = Color(hex: "#4F46E5")
+    public static let secondary = Color(hex: "#0D9488")
+    public static let border = Color(hex: "#E2E8F0")
   }
 
   public struct Dark {
-    public static let canvas = Color(hex: "#0E0A08")
-    public static let surface = Color(hex: "#18120E")
-    public static let elevated = Color(hex: "#241B15")
-    public static let textPrimary = Color(hex: "#FAF5EE")
-    public static let textMuted = Color(hex: "#A68E80")
-    public static let accent = Color(hex: "#E07A5F")
+    public static let canvas = Color(hex: "#08090C")
+    public static let surface = Color(hex: "#11131A")
+    public static let elevated = Color(hex: "#1A1D27")
+    public static let textPrimary = Color(hex: "#F3F4F6")
+    public static let textMuted = Color(hex: "#8A94A6")
+    public static let accent = Color(hex: "#6366F1")
     public static let secondary = Color(hex: "#14B8A6")
-    public static let border = Color(hex: "#362820")
+    public static let border = Color(hex: "#222634")
   }
 
   // iOS Human Interface Guidelines (HIG) Touch & Spring Constants

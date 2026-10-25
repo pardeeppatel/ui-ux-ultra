@@ -1,28 +1,28 @@
 /* ==========================================================================
    UI-UX-ULTRA v3.5 — 200-PALETTE ENGINE WITH DYNAMIC CONTRAST & RIM-LIGHTING
-   Family: travel-bharat-nomad | Category: travel
+   Family: saas-linear-indigo | Category: saas
    ========================================================================== */
 :root, [data-theme="light"] {
-  --bg-canvas: #FDFBF7;
-  --bg-surface: #F4EFE6;
-  --bg-elevated: #FFFFFF;
-  --text-primary: #241914;
-  --text-muted: #6E5A4F;
-  --accent-primary: #C85A32;
-  --accent-foreground: #0B0F19;
-  --accent-secondary: #0F766E;
-  --elevated-foreground: #241914;
-  --border-color: #E6DEC8;
+  --bg-canvas: #F8FAFC;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #F1F5F9;
+  --text-primary: #0B0F19;
+  --text-muted: #475569;
+  --accent-primary: #4F46E5;
+  --accent-foreground: #FFFFFF;
+  --accent-secondary: #0D9488;
+  --elevated-foreground: #0B0F19;
+  --border-color: #E2E8F0;
 
   /* Chart & Data Visualization Series */
-  --chart-1: #C85A32;
-  --chart-2: #0F766E;
+  --chart-1: #4F46E5;
+  --chart-2: #0D9488;
   --chart-3: #F59E0B;
   --chart-4: #10B981;
   --chart-5: #6366F1;
 
   /* Typography scale */
-  --font-display: 'Fraunces', serif;
+  --font-display: 'Space Grotesk', sans-serif;
   --font-sans: 'Plus Jakarta Sans', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
@@ -37,30 +37,30 @@
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
   --shadow-rim: inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
-  --shadow-glow: 0 0 24px -4px #C85A32;
+  --shadow-glow: 0 0 24px -4px #4F46E5;
 }
 
 [data-theme="dark"] {
-  --bg-canvas: #0E0A08;
-  --bg-surface: #18120E;
-  --bg-elevated: #241B15;
-  --text-primary: #FAF5EE;
-  --text-muted: #A68E80;
-  --accent-primary: #E07A5F;
-  --accent-foreground: #08090C;
+  --bg-canvas: #08090C;
+  --bg-surface: #11131A;
+  --bg-elevated: #1A1D27;
+  --text-primary: #F3F4F6;
+  --text-muted: #8A94A6;
+  --accent-primary: #6366F1;
+  --accent-foreground: #FFFFFF;
   --accent-secondary: #14B8A6;
-  --elevated-foreground: #FAF5EE;
-  --border-color: #362820;
+  --elevated-foreground: #F3F4F6;
+  --border-color: #222634;
 
   /* Chart & Data Visualization Series */
-  --chart-1: #E07A5F;
+  --chart-1: #6366F1;
   --chart-2: #14B8A6;
   --chart-3: #FBBF24;
   --chart-4: #34D399;
   --chart-5: #818CF8;
 
   /* Typography scale */
-  --font-display: 'Fraunces', serif;
+  --font-display: 'Space Grotesk', sans-serif;
   --font-sans: 'Plus Jakarta Sans', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
@@ -75,5 +75,5 @@
   --shadow-md: 0 4px 12px 0 rgba(0, 0, 0, 0.6);
   --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.75);
   --shadow-rim: inset 0 1px 0 0 rgba(255, 255, 255, 0.09);
-  --shadow-glow: 0 0 28px -4px #E07A5F;
+  --shadow-glow: 0 0 28px -4px #6366F1;
 }

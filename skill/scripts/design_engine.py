@@ -482,6 +482,294 @@ CATEGORY_TYPOGRAPHY = {
     "other": {"display": "'Space Grotesk', sans-serif", "sans": "'Plus Jakarta Sans', sans-serif", "mono": "'JetBrains Mono', monospace"}
 }
 
+CATEGORY_CONVERSION_PATTERNS = {
+    "saas": {
+        "pattern": "Command Hero + Interactive Bento Matrix",
+        "focus": "Product-led trial conversion & enterprise demo bookings",
+        "sections": [
+            "1. Hero: Telemetry Pill + Bold Value Prop + Primary Action & Live Demo CTA",
+            "2. Bento Matrix: Core feature grid with live component micro-interactions",
+            "3. Interactive Terminal / API Playground: Instant developer aha moment",
+            "4. Social Proof & Enterprise Telemetry: Uptime metrics (99.99%) & customer logos",
+            "5. Tiered Pricing Matrix + Sticky Bottom Conversion Bar"
+        ]
+    },
+    "travel": {
+        "pattern": "Search-First Split Hero + Curated Discovery Bento",
+        "focus": "Instant itinerary booking, route trust & destination exploration",
+        "sections": [
+            "1. Split Hero: Search booking engine (origin/destination/dates) + high-res destination visual",
+            "2. Curated Route Bento: Top trending destinations, flight corridors & hotel tiers",
+            "3. Trust & Fleet Specs: On-time guarantees, cancellation policies & baggage rules",
+            "4. Traveler Testimonials & Real Photos: Verified customer dispatches",
+            "5. Instant Booking Sticky Bar & Mobile Loyalty Pass"
+        ]
+    },
+    "healthcare": {
+        "pattern": "Calm Consultation Hero + Doctor Credential Grid",
+        "focus": "Patient trust, reduced visual anxiety & friction-free booking",
+        "sections": [
+            "1. Hero: Reassuring headline + HIPAA compliant badge + Instant consultation CTA",
+            "2. Specialty & Symptom Grid: Intuitive self-triage navigation",
+            "3. Doctor Profiles & Credentials: Board certifications & verified ratings",
+            "4. Patient Stories & Telehealth Workflow: Step-by-step visit explanation",
+            "5. Direct Appointment Slot Picker & Insurance Verification"
+        ]
+    },
+    "fintech-crypto": {
+        "pattern": "Security-First Hero + Live Yield/Asset Telemetry",
+        "focus": "Regulatory trust, asset transparency & frictionless KYC signup",
+        "sections": [
+            "1. Hero: Institutional security badge + Live portfolio/asset yield preview + Primary CTA",
+            "2. Live Asset Grid / Sparkline Board: Real-time price actions with positive/negative delta",
+            "3. Compliance & Custody Architecture: SOC2, FDIC insurance, on-chain transparency",
+            "4. Fee Comparison Matrix vs Traditional Banks / Competitors",
+            "5. Zero-Friction Onboarding Wizard (Email ➔ KYC in < 2 mins)"
+        ]
+    },
+    "ai-chatbot": {
+        "pattern": "Prompt-Sandbox Hero + Reasoning Architecture Showcase",
+        "focus": "Immediate interactive intelligence demonstration & API key signups",
+        "sections": [
+            "1. Hero: Interactive prompt sandbox + Live streaming token response preview",
+            "2. Multimodal Capability Bento: Audio, Vision, Code & Reasoning cards",
+            "3. Benchmark Performance Radar: Latency (<120ms), accuracy & context window metrics",
+            "4. Developer Integration: 3-line SDK snippet with one-click copy",
+            "5. Free Tier Signup CTA with immediate playground access"
+        ]
+    },
+    "developer-tools": {
+        "pattern": "Terminal-First Hero + CLI/SDK Interactive Playground",
+        "focus": "Immediate terminal command execution & developer adoption",
+        "sections": [
+            "1. Hero: One-line install command ($ npx ...) with copy button + Terminal demo",
+            "2. Architecture Diagram: High-performance pipeline flowchart",
+            "3. Speed Benchmarks: 10x-100x comparison charts vs legacy tooling",
+            "4. Ecosystem & Framework Matrix: Next.js, Node, Go, Rust integrations",
+            "5. GitHub Star Counter + Open-Source Community CTA"
+        ]
+    },
+    "e-commerce": {
+        "pattern": "Editorial Lookbook Hero + Limited Drop Bento Showcase",
+        "focus": "Sensory product immersion, high-intent cart adds & social proof",
+        "sections": [
+            "1. Hero: Editorial lookbook photography + Limited edition drop ticker + Shop CTA",
+            "2. Product Grid: Bento layout with instant hover previews and size pickers",
+            "3. Craftsmanship & Materials: High-resolution zoom & sustainability proof",
+            "4. Customer Photo Reviews & UGC Reel",
+            "5. Sticky Quick-Add Drawer + Free Express Shipping Guarantee"
+        ]
+    },
+    "gaming": {
+        "pattern": "Neon Immersion HUD + Battle Pass / Tournament Bracket",
+        "focus": "Auditory/visual hype, game downloads & tournament signups",
+        "sections": [
+            "1. Hero: Full-bleed gameplay video backdrop + Play Free Now CTA",
+            "2. Hero / Class Roster: Interactive character carousel with ability metrics",
+            "3. Seasonal Battle Pass / Quest Rewards Roadmap",
+            "4. Live Twitch / Discord Community Widget with active player counts",
+            "5. Platform Launcher Downloads (Steam, Epic, PlayStation, Xbox)"
+        ]
+    },
+    "education": {
+        "pattern": "Modular Course Hero + Gamified Skill Progression Path",
+        "focus": "Curriculum clarity, student outcomes & risk-free enrollment",
+        "sections": [
+            "1. Hero: Learning outcome statement + Accredited certificate badge + Start Free CTA",
+            "2. Interactive Syllabus Explorer: Week-by-week module breakdown",
+            "3. Alumni Career Outcomes: Salary jumps & hiring company logos",
+            "4. Live Instructor Office Hours & Mentorship Preview",
+            "5. 14-Day Money-Back Guarantee Enrollment Form"
+        ]
+    },
+    "food-restaurant": {
+        "pattern": "Sensory Culinary Hero + Digital Tasting Menu & Table Reservation",
+        "focus": "Visual appetite appeal, instant reservations & delivery routing",
+        "sections": [
+            "1. Hero: Sizzling artisanal dish photography + Reserve Table & Order Online CTAs",
+            "2. Tasting Menu Bento: Dietary tag filters (Vegan, Gluten-Free) & wine pairings",
+            "3. Chef Story & Farm-to-Table Origin Map",
+            "4. Press Accolades (Michelin, Eater, NYT) & Guest Testimonials",
+            "5. Interactive Table Booking Calendar & Private Dining Inquiries"
+        ]
+    },
+    "fitness": {
+        "pattern": "High-Volt Energy Hero + Trainer Roster & Class Scheduler",
+        "focus": "Motivation, workout regime clarity & free trial gym pass",
+        "sections": [
+            "1. Hero: High-energy athletic training footage + Claim 7-Day Free Pass CTA",
+            "2. Program Directory: HIIT, Strength, Pilates & Mobility tier cards",
+            "3. Coach Roster: Elite certifications, specialty domains & playlist vibes",
+            "4. Member Transformation Proof & Body Composition Metrics",
+            "5. Live Class Schedule Grid & Booking Integration"
+        ]
+    },
+    "real-estate": {
+        "pattern": "Architectural Showcase Hero + Interactive MLS Property Filter",
+        "focus": "High-ticket property discovery, virtual tours & VIP viewings",
+        "sections": [
+            "1. Hero: Architectural estate photography + Location & budget search bar",
+            "2. Featured Listings Bento: Price, square footage, bedrooms & 3D tour badge",
+            "3. Neighborhood Guide & WalkScore Analytics (Schools, Transit, Cafes)",
+            "4. Agent Track Record: Historic sales volume & client representation",
+            "5. Schedule Private Showing Modal & Mortgage Calculator"
+        ]
+    },
+    "creative": {
+        "pattern": "Portfolio Canvas Hero + Case Study Deep-Dive with Full Bleed Media",
+        "focus": "Aesthetic credibility, client roster & high-value project inquiries",
+        "sections": [
+            "1. Hero: Bold studio manifesto + Award winning reel + View Projects CTA",
+            "2. Selected Works Showcase: Case study cards with live hover states",
+            "3. Creative Process & Capabilities: Strategy, 3D, Identity, Motion",
+            "4. Global Client Wall & Industry Awards (Cannes, Awwwards, D&AD)",
+            "5. Project Inquiry Questionnaire & Schedule Discovery Call"
+        ]
+    },
+    "nft-web3": {
+        "pattern": "Live Minting Hero + On-Chain Provenance & Floor Price Ticker",
+        "focus": "Community credibility, smart contract verification & wallet connect",
+        "sections": [
+            "1. Hero: 3D asset preview + Live mint counter + Connect Wallet CTA",
+            "2. Real-Time Telemetry: Floor price, 24h volume, unique holders count",
+            "3. Lore & Utility Roadmap: Governance rights, staking rewards, IRL perks",
+            "4. Smart Contract Audit Badges & Transparent Founder Doxxing",
+            "5. Verified Secondary Marketplaces (OpenSea, Magic Eden, Blur)"
+        ]
+    },
+    "beauty-spa": {
+        "pattern": "Botanical Wellness Hero + Treatment Menu & Sensory Booking",
+        "focus": "Calm relaxation, clean ingredient trust & appointment booking",
+        "sections": [
+            "1. Hero: Tranquil spa photography + Organic certification + Book Treatment CTA",
+            "2. Ritual & Service Menu: Massages, facials, hydrotherapy with duration & price",
+            "3. Clean Botanical Philosophy: Non-toxic formulations & cruelty-free proof",
+            "4. Sensory Guest Reviews & Spa Atmosphere Tour",
+            "5. Instant Treatment Slot Reservation & Gift Card Purchase"
+        ]
+    },
+    "legal": {
+        "pattern": "Authority & Counsel Hero + Practice Area Matrix & Case Results",
+        "focus": "Legal authority, track record trust & confidential case review",
+        "sections": [
+            "1. Hero: Dignified counsel portrait + Total recovered damages ($M) + Free Consultation CTA",
+            "2. Practice Areas Bento: Corporate, Litigation, IP, Estate & Family Law",
+            "3. Proven Case Results & Verdict History with settlement numbers",
+            "4. Attorney Credentials: Top Law 500, Bar Association honors & bio links",
+            "5. 24/7 Confidential Case Evaluation Form & Direct Phone Hotline"
+        ]
+    },
+    "entertainment": {
+        "pattern": "Cinema Trailer Hero + Lineup Schedule & VIP Pass Tiering",
+        "focus": "Hype creation, trailer streaming & ticket conversion",
+        "sections": [
+            "1. Hero: Full-screen trailer video + Release date countdown + Get Tickets CTA",
+            "2. Cast & Lineup Showcase: Star headliners & behind-the-scenes gallery",
+            "3. Exclusive Fan Experiences & VIP Backstage Packages",
+            "4. Press Reviews & Critic Ratings (Rotten Tomatoes / Metacritic)",
+            "5. Seat Map Selector & Instant Mobile Ticket Checkout"
+        ]
+    },
+    "pet-services": {
+        "pattern": "Trust-First Hero + Care Facility Tour & Vet Credentials",
+        "focus": "Pet parent peace of mind, safety proof & first visit booking",
+        "sections": [
+            "1. Hero: Happy pets photography + Fear-free certified badge + Book Meet & Greet CTA",
+            "2. Services Directory: Daycare, boarding, grooming, training & veterinary",
+            "3. 24/7 Live Webcams & Sanitized Facility Standards Proof",
+            "4. Pet Parent Testimonials & Before/After Grooming Gallery",
+            "5. New Pet Profile Signup & First Day Free Pass"
+        ]
+    },
+    "events": {
+        "pattern": "Countdown Spectacle Hero + Stage Lineup & Tiered Ticket Access",
+        "focus": "Urgency, artist lineup hype & tiered ticket sellouts",
+        "sections": [
+            "1. Hero: Festival stage light spectacle + Live days countdown + Get Passes CTA",
+            "2. Multi-Stage Lineup Schedule: Filter by day, genre & stage location",
+            "3. Venue Map, Food Village & Travel Shuttles Guide",
+            "4. Aftermovie Video Reel & Past Edition Photo Highlights",
+            "5. Tier 1 / Tier 2 / VIP Ticket Comparison & Group Discounts"
+        ]
+    },
+    "other": {
+        "pattern": "Universal Bento Hero + Modular Feature Stack & Free Onboarding",
+        "focus": "Frictionless adoption, modular utility & immediate workflow value",
+        "sections": [
+            "1. Hero: Clean minimalist interface screenshot + Instant Start Free CTA",
+            "2. Modular Feature Bento: Drag-and-drop, real-time collaboration, shortcuts",
+            "3. Template Gallery: Pre-built templates ready in 1 click",
+            "4. Customer Productivity Stories: Hours saved & team velocity boosts",
+            "5. Free Forever Tier & Instant Workspace Creation"
+        ]
+    }
+}
+
+CATEGORY_CHART_RECOMMENDATIONS = {
+    "saas": "Area Sparkline (Throughput / Requests/sec) & Segmented Ring (Resource Utilization)",
+    "travel": "Horizontal Route Timeline & Seasonal Fare Price Bar Calendar",
+    "healthcare": "Heart Rate / Vitals Area Curve & Normal Distribution Blood Pressure Range",
+    "fintech-crypto": "Candlestick / Stepline (Price Volatility) & Donut (Asset Allocation)",
+    "ai-chatbot": "Latency Radar (<120ms) & Token Consumption Time-Series Area",
+    "developer-tools": "Real-Time Terminal Histogram & Response Latency Heatmap",
+    "e-commerce": "Conversion Funnel Waterfall & Inventory Velocity Bar",
+    "gaming": "Battle Pass XP Progress Curve & Head-to-Head Radar Comparison",
+    "education": "Skill Progression Mastery Arc & Weekly Study Streak Bar",
+    "food-restaurant": "Daily Table Capacity Heatmap & Peak Hours Line Curve",
+    "fitness": "Pace/Heart Rate Zone Split Bar & Daily Activity Ring Progress Gauge",
+    "real-estate": "Historical Neighborhood Price Trend & Price vs SqFt Scatter Plot",
+    "creative": "Project Timeline Milestone Bar & Creative Asset Distribution Donut",
+    "nft-web3": "24h Volume Stepline Chart & Floor Price Depth Chart",
+    "beauty-spa": "Treatment Popularity Tier Bar & Monthly Client Retention Curve",
+    "legal": "Damages Recovery Distribution & Case Timeline Milestone Tracker",
+    "entertainment": "Box Office Revenue Curve & Seat Availability Heatmap",
+    "pet-services": "Daily Daycare Activity Log & Weight / Growth Progress Tracker",
+    "events": "Ticket Tier Velocity Countdown Bar & Stage Schedule Timeline",
+    "other": "Multi-Metric Bento Sparkline & Categorical Bar Breakdown"
+}
+
+def generate_blueprint_box(light_p, dark_p, project_name="Project-Ultra"):
+    cat = light_p.get('category', 'other')
+    typo = CATEGORY_TYPOGRAPHY.get(cat, CATEGORY_TYPOGRAPHY['other'])
+    pattern_data = CATEGORY_CONVERSION_PATTERNS.get(cat, CATEGORY_CONVERSION_PATTERNS['other'])
+    charts = CATEGORY_CHART_RECOMMENDATIONS.get(cat, CATEGORY_CHART_RECOMMENDATIONS['other'])
+    rec_name = light_p['name'].replace(' (Light)', '')
+    contrast_l = light_p.get('contrast_text', 17.0)
+    contrast_d = dark_p.get('contrast_text', 16.8)
+
+    sections_text = "\n│     ".join(pattern_data['sections'])
+
+    return f"""┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ 🎨 UI/UX ULTRA — DESIGN SYSTEM & CONVERSION BLUEPRINT                                 │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│ TARGET: {rec_name} ({cat.upper()})
+│ CONVERSION PATTERN: {pattern_data['pattern']}
+│ CONVERSION FOCUS: {pattern_data['focus']}
+│
+│ 📐 5-STEP SECTION ARCHITECTURE:
+│     {sections_text}
+│
+│ 🎨 DUAL-THEME COLOR TOKENS:
+│   • Light Mode: Canvas {light_p['bg']} | Surface {light_p['surface']} | Accent {light_p['accent']} | Text {light_p['text']}
+│   • Dark Mode:  Canvas {dark_p['bg']} | Surface {dark_p['surface']} | Accent {dark_p['accent']} | Text {dark_p['text']}
+│   • Contrast Telemetry: WCAG AAA ({contrast_l}:1 Light / {contrast_d}:1 Dark)
+│
+│ 🔤 TYPOGRAPHY PAIRING:
+│   • Display / Headers: {typo['display']}
+│   • Interface / Body:  {typo['sans']}
+│   • Code / Monospace:  {typo['mono']}
+│
+│ 📊 DATA-VIZ CHARTS: {charts}
+│
+│ 🛡️ PRE-DELIVERY CRAFT CHECKLIST:
+│   [ ] Zero Emoji Icons: Strictly use Lucide or Heroicons SVGs
+│   [ ] Tactile Press: active:scale-[0.98] + cursor-pointer on all clickables
+│   [ ] Resilient Text: text-wrap: balance on headings, zero clipped chips
+│   [ ] Mobile Touch Targets: 44x44pt (iOS) / 48x48dp (Android/Web)
+│   [ ] Dynamic Contrast: --elevated-foreground enforced (Zero washed-out text)
+└────────────────────────────────────────────────────────────────────────────────────────┘"""
+
+
 def compile_css_pair(light_p, dark_p):
     cat = light_p.get('category', 'other')
     typo = CATEGORY_TYPOGRAPHY.get(cat, CATEGORY_TYPOGRAPHY['other'])
@@ -925,6 +1213,14 @@ def compile_theme_toggle_js():
 def compile_master_doc(light_p, dark_p, project_name="Project-Ultra"):
     cat = light_p.get('category', 'other')
     typo = CATEGORY_TYPOGRAPHY.get(cat, CATEGORY_TYPOGRAPHY['other'])
+    pattern_data = CATEGORY_CONVERSION_PATTERNS.get(cat, CATEGORY_CONVERSION_PATTERNS.get('other', {
+        "pattern": "Hero-Led Feature Showcase + Proof",
+        "focus": "Direct Value Proposition & Engagement",
+        "sections": ["Hero", "Features", "Proof", "Action", "FAQ"]
+    }))
+    charts = CATEGORY_CHART_RECOMMENDATIONS.get(cat, CATEGORY_CHART_RECOMMENDATIONS.get('other', 'Multi-Metric Bento Sparkline'))
+    sections_md = "\n".join([f"   - {s}" for s in pattern_data['sections']])
+
     return f"""# Design System: {project_name}
 
 > Curated Family: **{light_p['name'].replace(' (Light)', '')}**  
@@ -948,11 +1244,11 @@ def compile_master_doc(light_p, dark_p, project_name="Project-Ultra"):
 | **Subtle Border** | `--border-color` | `{light_p['border']}` | `--border-color` | `{dark_p['border']}` |
 
 ### Data Visualization Series
-- **Series 1:** `{light_p['chart_1']}` (Light) / `{dark_p['chart_1']}` (Dark)
-- **Series 2:** `{light_p['chart_2']}` (Light) / `{dark_p['chart_2']}` (Dark)
-- **Series 3:** `{light_p['chart_3']}` (Light) / `{dark_p['chart_3']}` (Dark)
-- **Series 4:** `{light_p['chart_4']}` (Light) / `{dark_p['chart_4']}` (Dark)
-- **Series 5:** `{light_p['chart_5']}` (Light) / `{dark_p['chart_5']}` (Dark)
+- **Series 1 (`--chart-1`):** `{light_p['chart_1']}` (Light) / `{dark_p['chart_1']}` (Dark)
+- **Series 2 (`--chart-2`):** `{light_p['chart_2']}` (Light) / `{dark_p['chart_2']}` (Dark)
+- **Series 3 (`--chart-3`):** `{light_p['chart_3']}` (Light) / `{dark_p['chart_3']}` (Dark)
+- **Series 4 (`--chart-4`):** `{light_p['chart_4']}` (Light) / `{dark_p['chart_4']}` (Dark)
+- **Series 5 (`--chart-5`):** `{light_p['chart_5']}` (Light) / `{dark_p['chart_5']}` (Dark)
 
 ---
 
@@ -969,7 +1265,35 @@ def compile_master_doc(light_p, dark_p, project_name="Project-Ultra"):
 
 ---
 
-## 4. Quickstart Integration
+## 4. Conversion Blueprint Architecture
+- **Conversion Pattern:** {pattern_data['pattern']}
+- **Conversion Focus:** {pattern_data['focus']}
+- **5-Step Section Architecture:**
+{sections_md}
+
+---
+
+## 5. Metric-to-Chart Pattern Blueprints
+- **Recommended Chart Architecture:** {charts}
+- **Chart Palette Pairing:**
+  - `--chart-1`: Primary Metric (Volume / Revenue / Core Series)
+  - `--chart-2`: Secondary Metric (Comparisons / Retention / Benchmarks)
+  - `--chart-3`: Accent / Target Indicator
+  - `--chart-4`: Anomaly / Threshold Alert
+  - `--chart-5`: Baseline / Projection
+
+---
+
+## 6. Pre-Delivery Production Craft Checklist
+- [ ] **Zero Emoji Icons:** Strictly use Lucide, Heroicons, or Phosphor SVGs. Never use Unicode emojis as UI icons.
+- [ ] **Tactile Press Feedback:** Every interactive element has `active:scale-[0.98]` and `cursor-pointer`.
+- [ ] **Resilient Typography:** Headings use `text-wrap: balance`; containers use overflow-safe wrapping (`break-words`).
+- [ ] **Mobile-First Touch Ergonomics:** Minimum 44x44pt (iOS) / 48x48dp (Android/Web) touch target bounding boxes.
+- [ ] **Dynamic Contrast Enforced:** Badges and cards use `--elevated-foreground` for zero washed-out text across themes.
+
+---
+
+## 7. Quickstart Integration
 
 ### In Shadcn UI
 Copy `design-system/shadcn-globals.css` into your project's `app/globals.css`.
@@ -1354,7 +1678,10 @@ def main():
         "selected_family": fam_id,
         "light": light_p,
         "dark": dark_p,
-        "alternatives": alt_fams
+        "alternatives": alt_fams,
+        "conversion_blueprint": CATEGORY_CONVERSION_PATTERNS.get(cat, CATEGORY_CONVERSION_PATTERNS.get("other")),
+        "chart_patterns": CATEGORY_CHART_RECOMMENDATIONS.get(cat, CATEGORY_CHART_RECOMMENDATIONS.get("other")),
+        "blueprint_box": generate_blueprint_box(light_p, dark_p, args.project)
     }
 
     if args.audit:

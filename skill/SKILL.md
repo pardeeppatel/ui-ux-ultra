@@ -54,13 +54,49 @@ Extract the domain category (e.g. `saas`, `travel`, `healthcare`, `fintech-crypt
 python3 ~/.gemini/config/skills/ui-ux-ultra/scripts/design_engine.py "<keywords>" --category <category> --html ./theme_preview.html
 ```
 
-#### Step 2: Present the Interactive Embed & Alternatives in Chat
+#### Step 2: Present the Interactive Embed & Blueprint Box in Chat
 In your chat response, you **MUST**:
 1. **Render the Live Interactive Embed**:
    ```html
    <agent-embed src="file:///absolute/path/to/theme_preview.html"></agent-embed>
    ```
-2. **Detail the #1 Recommended Palette**: Display name, family ID, light/dark accent colors, and WCAG contrast rating.
+2. **Output the Design System & Conversion Blueprint Box**:
+   Directly beneath the embed, render the structured specification box containing the target domain, conversion pattern, 5-step section architecture, dual-theme tokens, typography pairing, chart patterns, and craft checklist:
+   ```text
+   ┌────────────────────────────────────────────────────────────────────────────────────────┐
+   │ 🎨 UI/UX ULTRA — DESIGN SYSTEM & CONVERSION BLUEPRINT                                 │
+   ├────────────────────────────────────────────────────────────────────────────────────────┤
+   │ TARGET: Linear Obsidian & Indigo (SAAS)
+   │ CONVERSION PATTERN: Command Hero + Interactive Bento Matrix
+   │ CONVERSION FOCUS: Product-led trial conversion & enterprise demo bookings
+   │
+   │ 📐 5-STEP SECTION ARCHITECTURE:
+   │     1. Hero: Telemetry Pill + Bold Value Prop + Primary Action & Live Demo CTA
+   │     2. Bento Matrix: Core feature grid with live component micro-interactions
+   │     3. Interactive Terminal / API Playground: Instant developer aha moment
+   │     4. Social Proof & Enterprise Telemetry: Uptime metrics (99.99%) & customer logos
+   │     5. Tiered Pricing Matrix + Sticky Bottom Conversion Bar
+   │
+   │ 🎨 DUAL-THEME COLOR TOKENS:
+   │   • Light Mode: Canvas #F8FAFC | Surface #FFFFFF | Accent #4F46E5 | Text #0B0F19
+   │   • Dark Mode:  Canvas #08090C | Surface #11131A | Accent #6366F1 | Text #F3F4F6
+   │   • Contrast Telemetry: WCAG AAA (19.15:1 Light / 16.86:1 Dark)
+   │
+   │ 🔤 TYPOGRAPHY PAIRING:
+   │   • Display / Headers: 'Space Grotesk', sans-serif
+   │   • Interface / Body:  'Plus Jakarta Sans', sans-serif
+   │   • Code / Monospace:  'JetBrains Mono', monospace
+   │
+   │ 📊 DATA-VIZ CHARTS: Area Sparkline (Throughput / Requests/sec) & Segmented Ring (Resource Utilization)
+   │
+   │ 🛡️ PRE-DELIVERY CRAFT CHECKLIST:
+   │   [ ] Zero Emoji Icons: Strictly use Lucide or Heroicons SVGs
+   │   [ ] Tactile Press: active:scale-[0.98] + cursor-pointer on all clickables
+   │   [ ] Resilient Text: text-wrap: balance on headings, zero clipped chips
+   │   [ ] Mobile Touch Targets: 44x44pt (iOS) / 48x48dp (Android/Web)
+   │   [ ] Dynamic Contrast: --elevated-foreground enforced (Zero washed-out text)
+   └────────────────────────────────────────────────────────────────────────────────────────┘
+   ```
 3. **List ALL Available Alternatives in that Category**: Detail all 4-5 alternative families in that vertical with their family IDs, display names, accents, and specific vibes.
 4. **Ask the User for Theme & Polarity Choice in Plain Markdown Text**:
    > **🌓 Theme & Polarity Selection:**
@@ -73,8 +109,8 @@ In your chat response, you **MUST**:
 #### ⛔ MANDATORY HARD STOP (DO NOT BUILD CODE YET!):
 - **DO NOT** write application code (HTML, JSX, TSX, CSS).
 - **DO NOT** scaffold the project or create repository files.
-- **DO NOT** call the `ask_question` modal tool (which covers the chat with plain text buttons).
-- **END YOUR TURN IMMEDIATELY** after outputting the preview embed and the questions above. Wait for the user's response!
+- **DO NOT** call the `ask_question` modal tool (which suppresses the chat UI and opens a blocking text-only prompt).
+- **END YOUR TURN IMMEDIATELY** after outputting the preview embed, the blueprint box, and the questions above. Wait for the user's response!
 
 ---
 
@@ -444,45 +480,74 @@ When developing mobile apps using UI/UX Ultra:
 
 ---
 
-## 7. High-Converting Landing Page & Component Blueprints
+## 7. Domain-Coupled Conversion Page Blueprints (All 20 Categories)
 
-When designing landing pages or dashboards with UI/UX Ultra:
+High-converting user experiences depend on section architectures tailored to the psychological trigger of each domain. UI/UX Ultra encodes proven 5-step section flows for every category:
 
-### Hero Section Hierarchy
-1. **Pill Badge**: Top centered `--bg-elevated` pill with `--border-color` and `--accent-primary` text (`New v3.0 Release`).
-2. **H1 Headline**: Set in `--font-display`, bold (weight 700), size `clamp(2.5rem, 5vw, 4.5rem)`, color `--text-primary`.
-3. **Sub-headline**: Set in `--font-sans`, size `1.2rem`, color `--text-muted`, line-height 1.6.
-4. **CTA Row**:
-   - Primary Button: `background: var(--accent-primary); color: #fff; border-radius: 8px; font-weight: 600;`
-   - Secondary Button: `background: var(--bg-elevated); border: 1px solid var(--border-color); color: var(--text-primary);`
-5. **Interactive Preview / Bento Showcase**: Embedded app preview card using `--bg-surface`, `--border-color`, and subtle outer glow.
-
-### Card & Surface Elevation Rules
-- **Canvas (`--bg-canvas`)**: Only for outer page wallpaper/canvas.
-- **Surface (`--bg-surface`)**: For primary containers, cards, content blocks, and table bodies.
-- **Elevated (`--bg-elevated`)**: For interactive elements sitting on top of surfaces (inputs, nested tags, tooltips, dropdown menus).
-- **Border (`--border-color`)**: High-fidelity 1px solid border. Never use heavy 2px+ borders unless following Neobrutalism.
+| Category | Conversion Pattern | Primary Conversion Focus | 5-Step Section Architecture |
+| :--- | :--- | :--- | :--- |
+| **`saas`** | Command Hero + Interactive Bento Matrix | Product-led trial conversion & enterprise demo | 1. Hero with telemetry pill & dual CTA<br>2. Bento feature matrix with live micro-interactions<br>3. Interactive terminal / API playground<br>4. Uptime telemetry (99.99%) & enterprise logos<br>5. Tiered pricing matrix + sticky bottom conversion bar |
+| **`education`** | Curriculum Milestone & Instructor Proof | Course enrollment & syllabus download | 1. Hero with course outcome badge & video preview<br>2. Interactive curriculum syllabus tree<br>3. Faculty credentials & student outcome metrics<br>4. Live peer review carousel & project showcase<br>5. Enrollment countdown & flexible tuition options |
+| **`pet-services`** | Emotional Trust & Instant Booking Calendar | Online booking & vet consultation scheduling | 1. Hero with warm pet imagery & immediate booking widget<br>2. Care service tiers (Daycare, Grooming, Medical)<br>3. Certified vet staff profiles & safety certifications<br>4. Pet parent photo reviews & satisfaction guarantees<br>5. Interactive location map & urgent care contact bar |
+| **`ai-chatbot`** | Live Prompt Playground & Token Telemetry | Instant model playground test & API signup | 1. Hero with live conversational playground<br>2. Latency/benchmark telemetry vs frontier models<br>3. Pre-built agent workflow templates<br>4. Enterprise data security & zero-retention guarantee<br>5. Developer API keys generation & token calculator |
+| **`e-commerce`** | Visual Lookbook Grid & 1-Click Checkout | Cart add rate & collection discovery | 1. Full-bleed editorial hero with seasonal drop badge<br>2. Curated collection grid with quick-view modal<br>3. Social proof gallery & customer styled looks<br>4. Material provenance & sustainability breakdown<br>5. 1-click Apple Pay/Google Pay express bag |
+| **`fintech-crypto`** | Institutional Security & Live Ticker Bento | Account deposit & institutional onboarding | 1. Hero with real-time asset ticker & instant KYC start<br>2. Bento metrics (Yield, AUM, SOC-2/FINRA compliance)<br>3. Interactive fee comparison simulator<br>4. Cold storage architecture & insurance backing<br>5. Biometric mobile app QR download & signup card |
+| **`healthcare`** | Empathetic Trust & Direct Intake Pathway | Telehealth visit booking & HIPAA assurance | 1. Calming hero with condition search & specialist booking<br>2. Clinical services directory with transparent pricing<br>3. Board-certified physician credentials & hospital affiliations<br>4. HIPAA compliance & insurance provider eligibility checker<br>5. 24/7 emergency triage hotline & patient portal login |
+| **`creative`** | Full-Bleed Showcase & Case Study Reel | Client inbound inquiries & project kickoff | 1. Cinematic portfolio reel with dynamic filter tags<br>2. Deep-dive case studies with quantifiable client ROI<br>3. Design process breakdown (Sprint, Build, Ship)<br>4. Industry awards, Press recognition & Client quotes<br>5. Interactive project scope estimator & inquiry form |
+| **`real-estate`** | Spatial Discovery & MLS Property Matrix | Property tour scheduling & agent contact | 1. Hero with interactive location search & filter pills<br>2. Featured properties carousel with 3D virtual tour badges<br>3. Neighborhood amenities, schools & transit walkscore<br>4. Verified agent broker credentials & recent transactions<br>5. Private VIP showing booking modal & mortgage calculator |
+| **`gaming`** | Immersive Cinematic Lore & Battle Pass HUD | Game client pre-order & Discord guild join | 1. Full-motion video hero with cinematic sound toggle<br>2. Playable character class showcase & skill tree preview<br>3. Battle pass rewards track & seasonal leaderboard<br>4. Esports tournament highlights & Twitch live streamers<br>5. Instant game launcher download & early access claim |
+| **`food-restaurant`** | Sensory Appetite Appeal & Instant Table Reserve | Dinner reservation & online delivery order | 1. High-sensory food photography hero with table booking bar<br>2. Seasonal tasting menu with dietary allergen badges<br>3. Chef's table story & local farm sourcing provenance<br>4. Guest photo reviews & culinary press accolades<br>5. Interactive seating calendar & gift card purchase |
+| **`fitness`** | High-Energy Transformation & Class Pass Trial | Free 7-day pass claim & gym membership sign-up | 1. Kinetic video hero with transformation milestone ticker<br>2. Class schedule matrix with coach credentials<br>3. Member body-composition results & before/after case studies<br>4. Gym facility tour & recovery amenities (Sauna, Cryo)<br>5. Zero-commitment trial pass claim & membership tier picker |
+| **`travel`** | Experiential Destination Reel & Itinerary Builder| Itinerary booking & custom quote request | 1. Breathtaking destination hero with dates & guests picker<br>2. Curated day-by-day bespoke itineraries<br>3. Verified local guide credentials & traveler photo reviews<br>4. Transparent all-inclusive pricing breakdown<br>5. Flexible cancellation guarantee & instant reservation |
+| **`nft-web3`** | Mint Countdown & Trait Rarity Explorer | Wallet connect & primary mint purchase | 1. Hero with live mint countdown & supply progress bar<br>2. Trait rarity matrix & dynamic generative 3D preview<br>3. Roadmap milestones (Phase 1 to Phase 4 utility)<br>4. Smart contract audit verification (OpenZeppelin / CertiK)<br>5. Web3 wallet connect & Discord community portal |
+| **`beauty-spa`** | Botanical Sensory Journey & Wellness Booking | Treatment appointment booking & ritual kit purchase | 1. Serene botanical hero with treatment calendar booking<br>2. Signature spa rituals & holistic ingredient index<br>3. Certified aesthetician profiles & organic certifications<br>4. Client transformation testimonials & press mentions<br>5. Gift certificate generator & bespoke concierge booking |
+| **`developer-tools`** | CLI Terminal First & Documentation Sandbox | CLI install command copy & documentation reading | 1. Hero with 1-click terminal install snippet & GitHub stars<br>2. Interactive documentation sandbox with live code preview<br>3. Architecture benchmarks vs legacy tooling (10x faster)<br>4. Open-source contributor community & ecosystem plugins<br>5. CLI copy bar & cloud deployment start |
+| **`entertainment`** | Trailer Cinema Vault & Seat Selection Grid | Ticket purchase & media streaming subscription | 1. Full-screen trailer hero with showtime selector<br>2. Cast and director spotlight with exclusive interviews<br>3. Interactive IMAX / Dolby seat reservation map<br>4. Rotten Tomatoes & critic praise quotes<br>5. Mobile ticket pass download & concessions pre-order |
+| **`legal`** | Authoritative Counsel & Confidential Case Intake| Free consultation request & case assessment | 1. Hero with practice area focus & 24/7 hotline banner<br>2. Recovered damages track record ($100M+ recovered)<br>3. Attorney partner profiles & Bar association honors<br>4. Confidential client case histories & testimonials<br>5. Secure encrypted case assessment intake form |
+| **`events`** | Dynamic Speaker Lineup & Pass Tier Countdown | Ticket registration & VIP pass purchase | 1. High-impact keynote video hero with date/venue badge<br>2. Keynote speaker grid with talk abstracts<br>3. Multi-track agenda schedule (Engineering, Design, Growth)<br>4. Previous year aftermovie & attendee company logos<br>5. Tiered ticket pricing (Early Bird, VIP) & group checkout |
+| **`other`** | Modular Bento Grid & Multipurpose Action Bar | Primary engagement & application launch | 1. Bento hero with primary value proposition & live search<br>2. Modular functional widgets with micro-actions<br>3. User workflow templates & step-by-step guides<br>4. Telemetry metrics & verified user ratings<br>5. Universal action bar & cross-platform download links |
 
 ---
 
-## 8. Interactive Studio Previewer
+## 8. Metric-to-Chart Pattern Blueprints
+
+When building analytics dashboards, data visualization must map directly to the domain's core metric architecture. UI/UX Ultra configures 5 semantic chart tokens (`--chart-1` through `--chart-5`) paired to specific chart types:
+
+| Domain | Primary Chart Architecture (`--chart-1` / `--chart-2`) | Secondary / Alert Series (`--chart-3`, `--chart-4`, `--chart-5`) |
+| :--- | :--- | :--- |
+| **`saas`** | Area Sparkline (Throughput / Requests/sec) & Segmented Ring (Resource Utilization) | `--chart-3`: Target quota, `--chart-4`: Error spikes (P99), `--chart-5`: Baseline projection |
+| **`fintech-crypto`** | Candlestick / OHLC Chart with Volume Histogram & Order Book Depth Area | `--chart-3`: 24h Moving Avg, `--chart-4`: Stop-loss threshold, `--chart-5`: Liquidity band |
+| **`ai-chatbot`** | Token Generation Velocity Line & Latency Distribution Histogram (P50/P90/P99) | `--chart-3`: Context window utilization, `--chart-4`: Throttling/rate-limit, `--chart-5`: Cost/1k tokens |
+| **`developer-tools`** | Build Duration Stepline & Test Matrix Pass/Fail Heatmap Grid | `--chart-3`: Flaky test count, `--chart-4`: CI failure rate, `--chart-5`: Historical build median |
+| **`healthcare`** | Continuous Vitals Biometric Waveform & Medication Adherence Donut | `--chart-3`: Target clinical threshold, `--chart-4`: Elevated vital alert, `--chart-5`: Patient baseline |
+| **`e-commerce`** | Daily GMV Revenue Trend Bar & Checkout Funnel Step Area (Drop-off Analysis) | `--chart-3`: Conversion goal, `--chart-4`: Cart abandonment rate, `--chart-5`: Prior period comparison |
+| **`fitness`** | Heart Rate Zone Distribution Area & Weekly Caloric Burn Radial Bar | `--chart-3`: VO2 max target, `--chart-4`: Peak threshold, `--chart-5`: Resting heart rate |
+| **`real-estate`** | Historical Neighborhood Price Trend & Price vs SqFt Scatter Plot | `--chart-3`: Median listing price, `--chart-4`: Price drops, `--chart-5`: Metro average benchmark |
+
+---
+
+## 9. Pre-Delivery Production Craft Checklist
+
+Before finalizing any user interface, verify every item against this strict production-grade craft checklist:
+
+- [ ] **Zero Emoji Icons**: Strictly use clean SVG icons (Lucide, Heroicons, Phosphor). Never render Unicode emojis (e.g. 🚀, ⚡, 💡) as UI icons or button decorators.
+- [ ] **Tactile Press Feedback**: Every interactive button, chip, and card must include `active:scale-[0.98]` and `cursor-pointer` with transition timing `duration-150 ease-out`.
+- [ ] **Resilient Typography**: Headings must use `text-wrap: balance` to prevent awkward single-word orphans; containers must feature overflow-safe wrapping (`break-words`, `overflow-hidden` where appropriate).
+- [ ] **Mobile-First Touch Ergonomics**: Minimum touch bounding boxes of **44x44pt on iOS** and **48x48dp on Android/Web**; primary mobile CTAs anchored within thumb-accessible zones.
+- [ ] **Dynamic Contrast Enforced**: All badge chips, elevated cards, and mode toggles must use `--elevated-foreground` rather than hardcoded light/dark text classes, guaranteeing **WCAG AAA (>7:1)** contrast across both themes.
+- [ ] **Zero-Flash Theme Switching**: Ensure inline script initializes `data-theme` before page render, avoiding white-screen flashes during dark mode loads.
+- [ ] **Semantic Token Discipline**: All colors reference `--bg-canvas`, `--bg-surface`, `--bg-elevated`, `--text-primary`, `--accent-primary`, and `--border-color`. Zero raw hex values in application stylesheets.
+
+---
+
+## 10. Interactive Studio Previewer
 
 UI/UX Ultra includes an interactive single-page studio previewer (`previewer/index.html`) allowing real-time switching between all 200 palettes, live bento UI inspection, token chip extraction, and one-click CSS copying.
 
-To open the previewer:
-```bash
-npx ui-ux-ultra --preview
-# or
-npm run preview
-```
-
----
-
-## 9. Verification Checklist
-
-Before finalizing any UI implementation:
-- [ ] Are semantic tokens (`--bg-canvas`, `--bg-surface`, etc.) used instead of hardcoded hex values?
-- [ ] Is contrast between `--text-primary` and `--bg-surface` at least 4.5:1 (WCAG AA)?
-- [ ] Does the page transition smoothly between Light and Dark modes without layout shifts?
-- [ ] Are the correct domain-specific Google Fonts imported and applied?
-- [ ] Are hover and focus states styled using `--accent-primary` and `--bg-elevated`?
+- **Live Hosted Demo**: [https://pardeeppatel.github.io/ui-ux-ultra/](https://pardeeppatel.github.io/ui-ux-ultra/)
+- **Local Preview Command**:
+  ```bash
+  npx ui-ux-ultra --preview
+  # or
+  npm run preview
+  ```
