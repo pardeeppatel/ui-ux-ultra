@@ -551,3 +551,14 @@ UI/UX Ultra includes an interactive single-page studio previewer (`previewer/ind
   # or
   npm run preview
   ```
+
+---
+
+## 11. Updating to the Latest Version
+
+To update an existing installation to the latest version with new palettes, blueprints, and rules:
+
+```bash
+npx github:pardeeppatel/ui-ux-ultra --update
+```
+*(or re-run `npx github:pardeeppatel/ui-ux-ultra --global`)*. Antigravity and other supported editors will hot-reload the updated skill files immediately.

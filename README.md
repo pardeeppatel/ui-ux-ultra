@@ -111,6 +111,22 @@ node bin/cli.js --preview
 
 ---
 
+### 🔄 How to Update to the Latest Version
+
+If you already installed a previous version of UI/UX Ultra, updating takes **5 seconds** with a single command:
+
+```bash
+# Update existing installation across all detected skill directories:
+npx github:pardeeppatel/ui-ux-ultra --update
+```
+
+*(You can also re-run `npx github:pardeeppatel/ui-ux-ultra --global`)*.
+
+> **💡 Instant Hot-Reload:**  
+> When you run the update command, your local files in `~/.gemini/config/skills/ui-ux-ultra` (or `.cursor`, `.claude`, `.agents`) are immediately replaced with the latest release. Google Antigravity, Cursor, and Claude Code hot-reload the updated skill instantly — **no IDE restart required!**
+
+---
+
 ### Standalone Terminal / CLI (No AI Required)
 You don't need an AI agent to use UI/UX Ultra. Run it as an independent CLI in any terminal:
 ```bash
