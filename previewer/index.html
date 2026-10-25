@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UI/UX Ultra v3.5 — 200 Curated Palette & Design System Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&family=Syne:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-canvas: #09090B;
+      --bg-surface: #121216;
+      --bg-elevated: #1C1C22;
+      --text-primary: #F4F4F6;
+      --text-muted: #8E8E9E;
+      --accent-primary: #6366F1;
+      --accent-secondary: #14B8A6;
+      --border-color: #24242E;
+      --radius-card: 14px;
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --shadow-rim: inset 0 1px 0 0 rgba(255, 255, 255, 0.09);
+      --shadow-glow: 0 0 24px -4px var(--accent-primary);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    /* Top Studio Bar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: color-mix(in srgb, var(--bg-surface) 88%, transparent);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand { display: flex; align-items: center; gap: 0.75rem; }
+    .brand-badge {
+      background: var(--accent-primary);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+    }
+    .controls { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+    input, select, button {
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      padding: 0.55rem 0.85rem;
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-primary) 30%, transparent);
+    }
+    button.active, button.primary-btn {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+      font-weight: 600;
+    }
+    button.glow-btn {
+      background: var(--accent-primary);
+      color: #fff;
+      border: none;
+      box-shadow: var(--shadow-glow);
+    }
+
+    /* Category Ribbon */
+    .cat-ribbon {
+      display: flex;
+      gap: 0.45rem;
+      overflow-x: auto;
+      padding: 0.65rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-surface);
+    }
+    .cat-pill {
+      white-space: nowrap;
+      font-size: 0.78rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-canvas);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .cat-pill.active {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Main Workspace Split */
+    .studio-grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      min-height: calc(100vh - 120px);
+    }
+    @media (max-width: 1024px) {
+      .studio-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Left Palette Catalog */
+    .palette-list {
+      border-right: 1px solid var(--border-color);
+      padding: 1rem;
+      overflow-y: auto;
+      max-height: calc(100vh - 120px);
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .palette-item {
+      padding: 0.85rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+    .palette-item:hover, .palette-item.selected {
+      transform: translateY(-2px);
+      border-color: var(--accent-primary);
+    }
+    .swatch-strip {
+      display: flex;
+      height: 24px;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 0.55rem;
+      border: 1px solid rgba(128,128,128,0.25);
+    }
+    .swatch-strip span { flex: 1; }
+
+    /* Right Live UI Stage */
+    .live-stage {
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      overflow-y: auto;
+      max-height: calc(100vh - 120px);
+    }
+
+    /* View Switcher Tabs */
+    .view-tabs {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+    .tab-btn.active {
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+      font-weight: 600;
+      border: 1px solid var(--border-color);
+    }
+
+    /* Telemetry HUD Bar */
+    .telemetry-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-card);
+      padding: 0.85rem 1.25rem;
+      box-shadow: var(--shadow-rim);
+    }
+    .hud-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 6px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+    }
+    .pass-tag {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10B981;
+      font-weight: 600;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+    }
+
+    .bento-preview {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1.25rem;
+    }
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-card);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-rim);
+      transition: all 0.2s ease;
+    }
+    .span-12 { grid-column: span 12; }
+    .span-8 { grid-column: span 8; }
+    .span-4 { grid-column: span 4; }
+    .span-6 { grid-column: span 6; }
+    @media (max-width: 900px) {
+      .span-8, .span-4, .span-6 { grid-column: span 12; }
+    }
+
+    .token-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      margin: 0.25rem;
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+    pre {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      padding: 1rem;
+      border-radius: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      overflow-x: auto;
+      max-height: 340px;
+      line-height: 1.5;
+    }
+
+    /* Table styles for Dashboard */
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    th { text-align: left; padding: 0.65rem 0.75rem; color: var(--text-muted); font-weight: 500; border-bottom: 1px solid var(--border-color); }
+    td { padding: 0.75rem; border-bottom: 1px solid var(--border-color); }
+    .status-badge {
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* Switch Component */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+      background-color: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      transition: .25s; border-radius: 24px;
+    }
+    .slider:before {
+      position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px;
+      background-color: var(--text-primary);
+      transition: .25s; border-radius: 50%;
+    }
+    input:checked + .slider { background-color: var(--accent-primary); border-color: var(--accent-primary); }
+    input:checked + .slider:before { transform: translateX(20px); background-color: #fff; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <span class="brand-badge">UI/UX ULTRA v3.5</span>
+    <strong style="font-family: var(--font-display); font-size: 1.15rem;">200-Palette Studio 2.0</strong>
+    <span id="counterBadge" style="font-size:0.8rem; color:var(--text-muted); font-family:var(--font-mono);">200 Palettes</span>
+  </div>
+  <div class="controls">
+    <input type="search" id="searchInput" placeholder="Search vibe, industry, hex..." />
+    <select id="modeFilter">
+      <option value="all">All Modes (200)</option>
+      <option value="dark">Dark Palettes (100)</option>
+      <option value="light">Light Palettes (100)</option>
+    </select>
+    <button id="toggleThemeBtn" onclick="toggleMode()">🌓 Switch Polarity</button>
+    <button id="copyCodeBtn" class="primary-btn">Copy Active Code</button>
+  </div>
+</header>
+
+<div class="cat-ribbon" id="categoryRibbon"></div>
+
+<div class="studio-grid">
+  <aside class="palette-list" id="paletteList"></aside>
+
+  <main class="live-stage">
+    <!-- View Switcher -->
+    <div class="view-tabs">
+      <button class="tab-btn active" onclick="switchView('dashboard')">📊 Dashboard Studio</button>
+      <button class="tab-btn" onclick="switchView('landing')">🚀 Landing Page View</button>
+      <button class="tab-btn" onclick="switchView('kitchen-sink')">🧩 Component Kitchen Sink</button>
+      <button class="tab-btn" onclick="switchView('code-export')">💻 Code Export Hub</button>
+    </div>
+
+    <!-- Telemetry HUD Bar -->
+    <div class="telemetry-bar">
+      <span id="activeCategoryBadge" class="brand-badge">CATEGORY</span>
+      <span id="activePaletteId" style="font-family:var(--font-mono); font-size:0.82rem; font-weight:600;">#1</span>
+      <div class="hud-pill">Text Contrast: <strong id="hudTextContrast">19.2:1</strong> <span class="pass-tag" id="hudTextRating">AAA</span></div>
+      <div class="hud-pill">Accent Contrast: <strong id="hudAccentContrast">6.3:1</strong> <span class="pass-tag" id="hudAccentRating">AA</span></div>
+      <div class="hud-pill">Vibes: <span id="hudVibes" style="color:var(--text-muted);">modern</span></div>
+    </div>
+
+    <!-- VIEW 1: DASHBOARD STUDIO -->
+    <div id="viewDashboard" class="bento-preview">
+      <div class="card span-4">
+        <div style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">TOTAL REVENUE</div>
+        <div style="font-size:2rem; font-weight:700; font-family:var(--font-display); margin:0.35rem 0;">$48,250.00</div>
+        <span style="font-size:0.78rem; color:var(--accent-secondary); font-weight:600;">↑ 14.8% from last month</span>
+      </div>
+      <div class="card span-4">
+        <div style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">ACTIVE WORKSPACES</div>
+        <div style="font-size:2rem; font-weight:700; font-family:var(--font-display); margin:0.35rem 0;">1,420</div>
+        <span style="font-size:0.78rem; color:var(--accent-primary); font-weight:600;">+84 new teams this week</span>
+      </div>
+      <div class="card span-4">
+        <div style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">MEDIAN LATENCY</div>
+        <div style="font-size:2rem; font-weight:700; font-family:var(--font-display); margin:0.35rem 0;">32 ms</div>
+        <span style="font-size:0.78rem; color:#10B981; font-weight:600;">● Global Edge Optimal</span>
+      </div>
+
+      <!-- Area Chart Card -->
+      <div class="card span-8">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+          <h3 style="margin:0; font-family:var(--font-display);">Inference Throughput & Compute</h3>
+          <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">Realtime 24h</span>
+        </div>
+        <svg viewBox="0 0 500 120" style="width:100%; height:130px; overflow:visible;">
+          <defs>
+            <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="var(--accent-primary)" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="var(--accent-primary)" stop-opacity="0.0"/>
+            </linearGradient>
+          </defs>
+          <path d="M0,100 L40,75 L80,85 L130,45 L180,60 L240,20 L300,40 L360,15 L420,35 L500,5 L500,120 L0,120 Z" fill="url(#chartGrad)"/>
+          <path d="M0,100 L40,75 L80,85 L130,45 L180,60 L240,20 L300,40 L360,15 L420,35 L500,5" fill="none" stroke="var(--accent-primary)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M0,110 L50,95 L100,105 L160,80 L220,90 L280,65 L350,75 L420,50 L500,40" fill="none" stroke="var(--accent-secondary)" stroke-width="2" stroke-dasharray="4 4"/>
+        </svg>
+      </div>
+
+      <!-- Live Activity Table -->
+      <div class="card span-4">
+        <h3 style="margin:0 0 0.85rem 0; font-family:var(--font-display);">Recent Deploys</h3>
+        <table>
+          <tr>
+            <th>Target</th>
+            <th>Status</th>
+          </tr>
+          <tr>
+            <td>api-us-east</td>
+            <td><span class="status-badge" style="background:rgba(16,185,129,0.15); color:#10B981;">● Active</span></td>
+          </tr>
+          <tr>
+            <td>auth-worker</td>
+            <td><span class="status-badge" style="background:rgba(99,102,241,0.15); color:var(--accent-primary);">● Running</span></td>
+          </tr>
+          <tr>
+            <td>cron-indexer</td>
+            <td><span class="status-badge" style="background:rgba(245,158,11,0.15); color:#F59E0B;">● Queued</span></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- VIEW 2: LANDING PAGE VIEW -->
+    <div id="viewLanding" class="bento-preview" style="display:none;">
+      <div class="card span-12" style="text-align:center; padding:3.5rem 2rem;">
+        <span class="brand-badge" style="margin-bottom:1rem; display:inline-block;">✨ 200 CURATED PALETTES • ZERO GENERIC BLUE</span>
+        <h1 id="landingHeadline" style="font-family:var(--font-display); font-size:clamp(2.2rem, 4vw, 3.8rem); margin:0.5rem 0 1rem 0; letter-spacing:-0.03em;">
+          Build Faster with High-Craft Precision
+        </h1>
+        <p id="landingSub" style="color:var(--text-muted); max-width:620px; margin:0 auto 2rem auto; font-size:1.1rem; line-height:1.6;">
+          Engineered for developers and designers who refuse default Tailwind blue. Every palette contains paired Light and Dark modes with verified WCAG contrast.
+        </p>
+        <div style="display:flex; justify-content:center; gap:0.85rem; flex-wrap:wrap;">
+          <button class="primary-btn glow-btn" style="padding:0.85rem 1.75rem; font-size:0.95rem;">Get Started Now →</button>
+          <button style="padding:0.85rem 1.75rem; font-size:0.95rem;">Explore Catalog</button>
+        </div>
+      </div>
+
+      <div class="card span-4">
+        <div style="font-size:1.5rem; margin-bottom:0.75rem;">🎨</div>
+        <h3 style="margin:0 0 0.5rem 0; font-family:var(--font-display);">Dual Polarity by Default</h3>
+        <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.5; margin:0;">
+          Never invert colors with a hacky CSS filter. Every palette family has dedicated light and dark harmonies.
+        </p>
+      </div>
+
+      <div class="card span-4">
+        <div style="font-size:1.5rem; margin-bottom:0.75rem;">⚡</div>
+        <h3 style="margin:0 0 0.5rem 0; font-family:var(--font-display);">Shadcn & Tailwind v4</h3>
+        <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.5; margin:0;">
+          One-click compilation into Shadcn UI globals.css or modern Tailwind v4 @theme configurations.
+        </p>
+      </div>
+
+      <div class="card span-4">
+        <div style="font-size:1.5rem; margin-bottom:0.75rem;">🛡️</div>
+        <h3 style="margin:0 0 0.5rem 0; font-family:var(--font-display);">WCAG 2.1 AAA Verified</h3>
+        <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.5; margin:0;">
+          Pre-computed contrast ratios guarantee readability across canvas, surfaces, and interactive buttons.
+        </p>
+      </div>
+    </div>
+
+    <!-- VIEW 3: COMPONENT KITCHEN SINK -->
+    <div id="viewKitchenSink" class="bento-preview" style="display:none;">
+      <!-- Buttons Showcase -->
+      <div class="card span-6">
+        <h3 style="margin-top:0; font-family:var(--font-display);">Button Hierarchy</h3>
+        <div style="display:flex; gap:0.65rem; flex-wrap:wrap; margin-top:1rem;">
+          <button class="primary-btn">Primary Solid</button>
+          <button class="glow-btn">Accent Glow</button>
+          <button style="background:var(--accent-secondary); color:#fff; border:none; font-weight:600;">Secondary</button>
+          <button>Elevated</button>
+          <button style="background:transparent; border-color:var(--border-color);">Ghost</button>
+          <button style="background:#EF4444; color:#fff; border:none; font-weight:600;">Destructive</button>
+        </div>
+      </div>
+
+      <!-- Form Controls -->
+      <div class="card span-6">
+        <h3 style="margin-top:0; font-family:var(--font-display);">Form Controls & Inputs</h3>
+        <div style="display:flex; flex-direction:column; gap:0.75rem; margin-top:0.75rem;">
+          <input type="text" value="hello@company.com" />
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <span style="font-size:0.88rem;">Enable Realtime Telemetry</span>
+            <label class="switch">
+              <input type="checkbox" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div style="display:flex; align-items:center; gap:0.75rem;">
+            <input type="range" style="flex:1;" value="75">
+            <span style="font-family:var(--font-mono); font-size:0.8rem;">75%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feedback Banners -->
+      <div class="card span-12">
+        <h3 style="margin-top:0; font-family:var(--font-display);">Alert & Feedback Banners</h3>
+        <div style="display:flex; flex-direction:column; gap:0.65rem;">
+          <div style="padding:0.75rem 1rem; border-radius:8px; background:rgba(16,185,129,0.12); border:1px solid #10B981; color:#10B981; font-size:0.85rem;">
+            ✓ <strong>Success:</strong> Tokens successfully compiled to ./design-system/
+          </div>
+          <div style="padding:0.75rem 1rem; border-radius:8px; background:color-mix(in srgb, var(--accent-primary) 12%, transparent); border:1px solid var(--accent-primary); color:var(--text-primary); font-size:0.85rem;">
+            ℹ <strong>Info:</strong> Palette family matches B2B SaaS command-bar architecture.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 4: CODE EXPORT HUB -->
+    <div id="viewCodeExport" class="bento-preview" style="display:none;">
+      <div class="card span-12">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.6rem;">
+          <div style="display:flex; gap:0.5rem;">
+            <button class="export-tab-btn active" onclick="setExportFormat('css')">CSS Variables</button>
+            <button class="export-tab-btn" onclick="setExportFormat('shadcn')">Shadcn UI</button>
+            <button class="export-tab-btn" onclick="setExportFormat('tailwind')">Tailwind v3</button>
+            <button class="export-tab-btn" onclick="setExportFormat('tailwind-v4')">Tailwind v4</button>
+            <button class="export-tab-btn" onclick="setExportFormat('motion')">Framer Motion</button>
+          </div>
+          <button id="copyCodeInnerBtn" class="primary-btn" onclick="copyCurrentCode()">Copy to Clipboard</button>
+        </div>
+        <pre id="codeOutputBox"></pre>
+      </div>
+
+      <!-- Token Chips Card -->
+      <div class="card span-12">
+        <h3 style="margin-top:0; font-family:var(--font-display);">Active Semantic Tokens</h3>
+        <div id="tokenChips"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+
+<script>
+// 20 Categories x 5 Curated Families x 2 Polarities = 200 Standalone Palettes
+const RAW_CATALOG = {
+  "saas": [
+    ["saas-linear-indigo","Linear Obsidian & Indigo","modern precision command-bar developer b2b",["#F8FAFC","#FFFFFF","#F1F5F9","#0B0F19","#475569","#4F46E5","#0D9488","#E2E8F0"],["#08090C","#11131A","#1A1D27","#F3F4F6","#8A94A6","#6366F1","#14B8A6","#222634"]],
+    ["saas-stripe-violet","Stripe Mesh & Royal Slate","payments enterprise billing clean elevated",["#F6F9FC","#FFFFFF","#EDF2F7","#0A2540","#425466","#635BFF","#00D4B6","#E3E8EE"],["#050D1A","#0A192F","#112240","#F8FAFC","#8892B0","#7A73FF","#00F5D4","#1D2D50"]],
+    ["saas-vercel-geist","Geist Monochrome & Signal","minimalist cloud edge deployment stark",["#FAFAFA","#FFFFFF","#F0F0F0","#0A0A0A","#525252","#000000","#0070F3","#E5E5E5"],["#000000","#0A0A0A","#141414","#EDEDED","#888888","#FFFFFF","#3291FF","#262626"]],
+    ["saas-raycast-crimson","Raycast Productivity & Crimson","launcher workflow speed keyboard macos",["#F9F8F6","#FFFFFF","#EFECE8","#141210","#635E59","#E11D48","#F59E0B","#E4DFD9"],["#0B0A0E","#15131B","#201D29","#F5F3F7","#968FA6","#FF3366","#FFAA00","#2A2636"]],
+    ["saas-attio-editorial","Attio Warm CRM & Cobalt","crm relational database collaborative",["#FAF9F5","#FFFFFF","#F2EFE9","#191918","#6B6860","#2563EB","#D97706","#E6E2D8"],["#0E0E0D","#171715","#22221F","#F5F4F0","#99968E","#3B82F6","#F59E0B","#2E2E2A"]]
+  ],
+  "education": [
+    ["edu-oxford-parchment","Oxford Library & Brass","university academic research classical",["#FCFBF7","#F4F1EA","#FFFFFF","#161E2E","#525E75","#1E3A8A","#B45309","#E2DDD2"],["#0A0F1D","#121A2F","#1B2642","#F5F3EF","#8E9BB5","#60A5FA","#F59E0B","#263554"]],
+    ["edu-brilliant-axiom","Axiom Interactive STEM","math physics logic puzzles stem",["#FFFDF9","#F7F3EB","#FFFFFF","#111111","#55524D","#EAB308","#10B981","#E5DFD3"],["#0D0D0C","#171715","#242320","#FAFAFA","#A3A09A","#FACC15","#34D399","#302E2A"]],
+    ["edu-duolingo-kinetic","Kinetic Language Pop","gamified language flashcards streaks",["#F7FBF7","#FFFFFF","#EBF5EB","#142416","#4F6953","#16A34A","#0284C7","#D1E7D3"],["#0A140C","#122215","#1B3320","#F0FDF4","#86EFAC","#22C55E","#38BDF8","#23422A"]],
+    ["edu-bauhaus-studio","Bauhaus Primary Workshop","design art school architecture modernist",["#F5F3EE","#FFFFFF","#EAE6DD","#121212","#4F4F4F","#D92B2B","#1D4ED8","#121212"],["#111111","#1C1C1C","#292929","#F5F3EE","#A0A0A0","#EF4444","#FACC15","#F5F3EE"]],
+    ["edu-montessori-botanic","Montessori Sage & Terracotta","early-learning calm mindful reading",["#F8F7F2","#EFECE4","#FFFFFF","#212922","#5C6B5E","#3D7A5A","#C86D51","#DCD7C9"],["#111713","#19221C","#243028","#F2F5F3","#94A898","#52B788","#E07A5F","#2F3E34"]]
+  ],
+  "pet-services": [
+    ["pet-sunny-meadow","Sunny Paws & Clover","dog-walking grooming cheerful friendly",["#FEFBF6","#FFF5E4","#FFFFFF","#2B1E16","#6E5648","#EA580C","#16A34A","#F2DFC4"],["#14100E","#1F1815","#2C221E","#FDF8F5","#B0978A","#FB923C","#4ADE80","#382C26"]],
+    ["pet-nordic-vet","Nordic Veterinary Clinic","clinical vet medical pet-insurance",["#F4FAF9","#FFFFFF","#E6F4F1","#0D2624","#4A6B68","#0D9488","#F59E0B","#CBE5E0"],["#071413","#0E2422","#163633","#F0FDFA","#81B5B0","#2DD4BF","#FBBF24","#214A46"]],
+    ["pet-cozy-whiskers","Cozy Whiskers & Lavender","cat-cafe adoption shelter boutique",["#FDF8FA","#F7EEF2","#FFFFFF","#291822","#6E5062","#DB2777","#7C3AED","#EBD8E2"],["#160E13","#24161F","#331F2C","#FDF2F8","#B894A9","#F472B6","#A78BFA","#422839"]],
+    ["pet-woodland-hound","Woodland Hound & Bark","outdoor adventure k9 training gear",["#F7F5F0","#EDE8DD","#FFFFFF","#211C15","#63584A","#B45309","#15803D","#DDD4C2"],["#120F0B","#1C1712","#29221A","#F7F3EB","#A39481","#F59E0B","#22C55E","#382E24"]],
+    ["pet-aquatic-coral","Reef & Exotic Aquatics","aquarium exotic birds reptiles",["#F2F9FC","#FFFFFF","#E1F2F7","#08202B","#436575","#0284C7","#F97316","#C4E3ED"],["#041017","#091E2B","#102E40","#F0F9FF","#7AB0C7","#38BDF8","#FB923C","#1A435C"]]
+  ],
+  "ai-chatbot": [
+    ["ai-velvet-cosmos","Velvet Cosmos & Neural Violet","llm generative-ai copilot reasoning",["#F7F6FF","#FFFFFF","#EDE9FE","#140F24","#59507A","#7C3AED","#EC4899","#DDD6FE"],["#070510","#110D21","#1B1534","#F5F3FF","#9B90C2","#8B5CF6","#F43F5E","#2A214D"]],
+    ["ai-anthropic-warm","Humanist Parchment & Clay","research alignment conversational reading",["#F9F6F0","#F1ECE1","#FFFFFF","#191714","#666159","#C86446","#2E6F64","#E2DBD0"],["#12110F","#1C1A17","#26231F","#F2EFE9","#999287","#E07A5F","#52B788","#332F29"]],
+    ["ai-synapse-cyan","Synapse Matrix & Bioluminescence","autonomous-agents voice-ai real-time",["#F2FBF9","#FFFFFF","#E0F5F0","#071F1C","#436661","#059669","#0284C7","#C2E8E0"],["#040D0C","#091A18","#102926","#ECFDF5","#74B8B0","#10B981","#00F5D4","#193D38"]],
+    ["ai-aurora-prism","Aurora Glass & Hologram","multimodal video-gen image-gen creative",["#FAF8FF","#FFFFFF","#F3E8FF","#1E1033","#644F82","#9333EA","#2563EB","#E9D5FF"],["#090612","#130D26","#1E153B","#FAF5FF","#A796C7","#C084FC","#38BDF8","#32235E"]],
+    ["ai-terminal-inference","Inference Zero-Latency Mono","local-llm cli benchmark tokens",["#F4F4F0","#FFFFFF","#E8E8E2","#111110","#575752","#EA580C","#111110","#D4D4CC"],["#0A0A09","#141412","#1F1F1C","#F5F5F0","#8C8C84","#FF6B00","#10B981","#2B2B26"]]
+  ],
+  "e-commerce": [
+    ["ecom-atelier-alabaster","Atelier Alabaster & Espresso","fashion luxury apparel lookbook d2c",["#FAF8F5","#F2EFE9","#FFFFFF","#181512","#665E57","#8C4A27","#1F4E3D","#E5DFD5"],["#0E0C0A","#171411","#241F1B","#F7F4EF","#9E9389","#D48C6A","#4E9A7E","#302A24"]],
+    ["ecom-tokyo-street","Shibuya Streetwear & Volt","sneakers drops streetwear hype",["#F6F6F4","#FFFFFF","#EAEAE6","#0A0A0A","#52524E","#FF2A00","#0044FF","#0A0A0A"],["#080808","#121212","#1F1F1F","#FFFFFF","#8C8C8C","#CCFF00","#FF0055","#2E2E2E"]],
+    ["ecom-nordic-home","Copenhagen Ceramic & Oak","furniture interior decor minimal craft",["#F7F5F0","#EFECE4","#FFFFFF","#1E1C1A","#69645E","#A16207","#3F6212","#DFD9CE"],["#121110","#1C1A18","#262320","#F5F2EB","#9C958C","#EAB308","#84CC16","#332F2B"]],
+    ["ecom-fresh-bazaar","Artisanal Pantry & Saffron","grocery organic spices gourmet",["#FFFDF7","#F7F2E4","#FFFFFF","#211911","#6B5B4B","#D97706","#15803D","#E8DEC6"],["#120E09","#1C160F","#292016","#FDF8EE","#A89682","#F59E0B","#22C55E","#382C1E"]],
+    ["ecom-sonic-electronics","Precision Matte & Cobalt","gadgets audio electronics cameras",["#F2F4F7","#FFFFFF","#E4E8EE","#0D131A","#4F5B69","#2563EB","#EA580C","#D0D7E2"],["#090C10","#11161D","#19212B","#F0F4F8","#8594A6","#3B82F6","#F97316","#25303F"]]
+  ],
+  "fintech-crypto": [
+    ["fin-emerald-quant","Emerald Quant & Institutional","trading stocks wealth terminal",["#F4F7F6","#FFFFFF","#E6F0EC","#071713","#46635B","#059669","#0284C7","#CBE0D8"],["#040B09","#091713","#102620","#ECFDF5","#6EE7B7","#10B981","#38BDF8","#17382F"]],
+    ["fin-swiss-private","Zurich Private Banking Gold","private-wealth gold heritage card",["#F9F8F6","#F0EDE6","#FFFFFF","#12151C","#565B66","#9A7B3E","#1E3A8A","#DFDAD0"],["#090B10","#11151F","#1A202E","#F7F5F0","#8F96A6","#D4AF37","#60A5FA","#283044"]],
+    ["fin-defi-plasma","DeFi Plasma & Zero-Knowledge","crypto dex liquidity layer2",["#F5F7FF","#FFFFFF","#E8ECFF","#0A0E24","#4E557A","#4F46E5","#EC4899","#D4DCFF"],["#050611","#0C0E21","#141836","#F2F4FF","#8890BD","#6366F1","#00F5D4","#232954"]],
+    ["fin-neobank-lime","Neobank Gen-Z Volt & Charcoal","consumer-banking split-bills cashback",["#F8FAF5","#FFFFFF","#EDF2E6","#0E140B","#4F5E48","#65A30D","#7C3AED","#D8E3CC"],["#0A0D08","#12170F","#1B2416","#F4FCE3","#8FA882","#A3E635","#A855F7","#283621"]],
+    ["fin-ledger-copper","Ledger Copper & Slate","accounting audit tax invoicing",["#F7F6F4","#FFFFFF","#EDEBE6","#171A1C","#575E63","#B45309","#0F766E","#DDD9D0"],["#0C0E10","#14181C","#1E2429","#F5F3F0","#8D979E","#F59E0B","#14B8A6","#2B333B"]]
+  ],
+  "healthcare": [
+    ["health-clinical-teal","Mayo Clinical Calm & Teal","hospital telemedicine patient-portal",["#F2F9F9","#FFFFFF","#E3F2F2","#082226","#45686E","#0D9488","#2563EB","#C7E5E5"],["#051114","#0B1F24","#123038","#ECFEFF","#7AB8C2","#2DD4BF","#38BDF8","#1C454F"]],
+    ["health-biometric-pulse","Biometric Wearable & Coral","cardio sleep-tracker longevity",["#FAF7F7","#FFFFFF","#F5ECEC","#1F1215","#6B5056","#E11D48","#0284C7","#E8D5D8"],["#0F080A","#1A0E12","#26151B","#FFF1F2","#B58A94","#FB7185","#38BDF8","#3B2029"]],
+    ["health-mindful-sage","Mindful Therapy & Eucalyptus","mental-health counseling calm",["#F6F8F5","#ECEFE9","#FFFFFF","#1B241D","#566659","#3B7A57","#D97706","#D6DFD8"],["#0D120E","#151F18","#1F2E23","#F0F7F2","#8CA692","#52B788","#FBBF24","#2B4031"]],
+    ["health-pharma-cobalt","Precision Biotech & Genomics","biotech lab genomics pharma",["#F5F8FC","#FFFFFF","#E8EFF8","#0A1829","#495E78","#1D4ED8","#0D9488","#CFE0F2"],["#060D17","#0C192B","#142742","#F0F6FF","#7FA0C4","#3B82F6","#2DD4BF","#1E3A5F"]],
+    ["health-pediatric-warm","Warm Family Care & Apricot","pediatrics maternity care",["#FFFBF7","#FFF3E8","#FFFFFF","#261812","#6E5549","#EA580C","#0D9488","#F2DCC9"],["#140D0A","#211611","#2E1F18","#FFF7ED","#B39486","#FB923C","#2DD4BF","#3D2920"]]
+  ],
+  "creative": [
+    ["creative-swiss-grid","International Typographic Red","swiss-design agency architecture",["#FFFFFF","#F4F4F2","#FFFFFF","#0A0A0A","#525252","#E60012","#0A0A0A","#0A0A0A"],["#0A0A0A","#141414","#1F1F1F","#FFFFFF","#999999","#FF1E27","#FFFFFF","#FFFFFF"]],
+    ["creative-acid-brutal","Neo-Brutal Acid & Violet","indie-maker zine web-brutalism",["#FFFDF5","#FFFFFF","#F3EFE0","#0A0A0A","#4A4A46","#A3E635","#7C3AED","#0A0A0A"],["#0B0B0A","#161614","#22221E","#FAF8F0","#9E9E95","#CCFF00","#A855F7","#FAF8F0"]],
+    ["creative-risograph-ink","Risograph Soy Ink & Paper","illustration printmaker webtoon",["#FBF7EE","#F2EBD9","#FFFFFF","#1B263B","#5C677D","#FF4D6D","#00A896","#DFD5BE"],["#0F141F","#182030","#222D42","#F7F2E6","#8FA0BA","#FF758F","#02C39A","#31405E"]],
+    ["creative-monochrome-film","Leica Silver Gelatin & Film","photography cinematography arts",["#F5F5F3","#EAEAE6","#FFFFFF","#121212","#595956","#121212","#D9381E","#D6D6D0"],["#080808","#111111","#1A1A1A","#F2F2F0","#8C8C88","#FFFFFF","#FF4500","#292929"]],
+    ["creative-kinetic-pop","Studio Memphis & Cobalt","motion-design 3d-artist studio",["#FAF8FF","#FFFFFF","#F0EBFF","#120D24","#544C70","#2563EB","#F43F5E","#120D24"],["#090712","#130F24","#1D1736","#F8F6FF","#9A90BD","#38BDF8","#FB7185","#38BDF8"]]
+  ],
+  "real-estate": [
+    ["estate-travertine-villa","Travertine Stone & Olive Sanctuary","luxury-estate villa acreage elysium",["#F7F5F0","#EDEAE2","#FFFFFF","#1C1A17","#69635A","#8C6239","#3B5E4C","#D8D2C5"],["#0C0B09","#151310","#201D18","#F5F2EB","#9E9589","#C5A059","#52826A","#2E2A23"]],
+    ["estate-manhattan-penthouse","Penthouse Obsidian & Brass","high-rise commercial luxury-condos",["#F6F6F8","#ECECEF","#FFFFFF","#111318","#555963","#1E293B","#B45309","#D8D9E0"],["#08090C","#101218","#191C26","#F4F5F7","#8C92A3","#D4AF37","#60A5FA","#252A38"]],
+    ["estate-nordic-timber","Nordic Birch & Fjord Slate","sustainable-homes modular-cabins",["#F9F8F5","#F0EDE6","#FFFFFF","#1E2224","#5F666A","#2D5A6B","#B86B43","#DFDBD0"],["#0E1112","#161B1D","#20272A","#F2F5F6","#8F9A9E","#569BB5","#D98A62","#2D373B"]],
+    ["estate-mediterranean-terracotta","Amalfi Sun & Terracotta","resort coastal holiday-rentals",["#FDFBF7","#F5EFE4","#FFFFFF","#241B16","#6E5A4E","#C85A32","#0284C7","#E6DBC8"],["#120E0B","#1C1612","#281F1A","#FAF5EE","#A69183","#E07A5F","#38BDF8","#382C25"]],
+    ["estate-proptech-blueprint","PropTech Valuation & Map","marketplace mortgage zoning",["#F4F7FA","#FFFFFF","#E8EEF5","#0C1726","#4B5E75","#0284C7","#059669","#CEDBE8"],["#060C14","#0D1726","#15243B","#F0F6FC","#7EA8CC","#38BDF8","#10B981","#1F3657"]]
+  ],
+  "gaming": [
+    ["game-cyber-phosphor","Night City Cyber Phosphor","sci-fi cyberpunk esports fps",["#ECEFF4","#FFFFFF","#DDE3ED","#090D16","#475266","#FF0055","#0066FF","#090D16"],["#05050A","#0C0B16","#151326","#ECFEFF","#7C759E","#00F5D4","#FF2A85","#00F5D4"]],
+    ["game-elden-mythos","Tarnished Gold & Shadow Lore","rpg dark-fantasy soulslike myth",["#F5F2EB","#EAE4D7","#FFFFFF","#1A1612","#635A4F","#9E7B2F","#8C1D1D","#D6CCB8"],["#080706","#120F0D","#1C1814","#F2ECE1","#9C8F7E","#D4AF37","#DC2626","#302820"]],
+    ["game-arcade-nectar","16-Bit Shibuya Arcade Pop","indie-game platformer retro",["#FFFDF7","#FFFFFF","#F3EFE2","#120C1F","#594E70","#7C3AED","#F59E0B","#120C1F"],["#0D0817","#170F29","#23173D","#FAF5FF","#A695C7","#FACC15","#EC4899","#FACC15"]],
+    ["game-tactical-ops","Tactical Radar & Olive Telemetry","battle-royale mil-sim strategy",["#F2F4F0","#E6E9E2","#FFFFFF","#141712","#555C50","#EA580C","#3F6212","#C9CFC2"],["#0A0C09","#131711","#1C2219","#EBF0E8","#889481","#FF5500","#84CC16","#2B3626"]],
+    ["game-valor-mecha","Mecha Chassis White & Crimson","hero-shooter anime-action",["#F5F6F8","#FFFFFF","#E6E8ED","#0F141C","#525B6B","#FF334B","#00B4D8","#D0D5DE"],["#090C12","#121722","#1B2333","#F2F5FA","#8592A8","#FF4655","#00F5D4","#28344B"]]
+  ],
+  "food-restaurant": [
+    ["food-saffron-thali","Royal Saffron & Brass Thali","indian-cuisine vegetarian thali spice",["#FDFBF7","#F5EFE2","#FFFFFF","#241710","#6E5647","#D97706","#15803D","#E8DCC4"],["#120B08","#1C120D","#291B14","#FDF7EE","#A88F7D","#F59E0B","#22C55E","#3B281E"]],
+    ["food-kyoto-matcha","Uji Matcha & Black Sesame","tea-house japanese organic zen",["#F7F6F0","#EDEBE0","#FFFFFF","#1A211B","#59665B","#3B6E4C","#C85A32","#D8D5C5"],["#0E120F","#161C18","#202923","#F2F5F2","#8FA392","#52B788","#E07A5F","#2D3B31"]],
+    ["food-artisanal-roastery","Third-Wave Espresso & Crema","coffee-house bakery cafe roastery",["#FBF8F3","#F2ECE1","#FFFFFF","#211813","#6B584E","#9C4A27","#2A6F68","#E3D8C6"],["#110C0A","#1B1410","#261C17","#F7F1E8","#A38E82","#E07A5F","#52B788","#362820"]],
+    ["food-mediterranean-bistro","Olive Grove & Heirloom Tomato","farm-to-table vegan pizzeria",["#FCFBF7","#F3EFE6","#FFFFFF","#1E2118","#5F6653","#C83E2B","#4D7C0F","#E2DCCB"],["#10120C","#191C14","#24291D","#F6F7F0","#969E86","#EF4444","#84CC16","#323828"]],
+    ["food-neon-izakaya","Midnight Street Food & Lantern","night-market street-food delivery",["#FFFDF8","#FFF5E6","#FFFFFF","#1C1417","#665259","#E11D48","#EAB308","#F0DEC6"],["#0E090C","#181015","#241820","#FFF5F7","#AD8E99","#FF2A55","#FACC15","#382431"]]
+  ],
+  "fitness": [
+    ["fit-carbon-volt","Carbon Track & High-Volt","hiit crossfit gym performance",["#F7F9F4","#FFFFFF","#EBF0E4","#0E140A","#4F5E46","#65A30D","#EA580C","#D4E0C5"],["#080B07","#11160E","#1A2216","#F4FCE3","#8CA67E","#A3E635","#FF5500","#273321"]],
+    ["fit-alpine-endurance","Alpine Trail & Strava Orange","running cycling marathon gps",["#F9F8F6","#FFFFFF","#EFECE6","#171412","#5E5650","#FC4C02","#0284C7","#E0DAD0"],["#0C0A09","#161311","#211C19","#F7F5F2","#9C9189","#FF5714","#38BDF8","#302925"]],
+    ["fit-pilates-sculpt","Studio Sculpt & Warm Clay","pilates yoga mobility recovery",["#FAF7F2","#F2ECE3","#FFFFFF","#241D18","#6B5E54","#B86B4B","#4A6B5D","#E3D9CA"],["#13100D","#1D1814","#29221D","#F7F2EC","#A39387","#D98A6C","#6BA38B","#362D26"]],
+    ["fit-aqua-triathlon","Hydro Velocity & Cobalt","swimming triathlon hydration",["#F2F8FC","#FFFFFF","#E3F0F9","#081C29","#466375","#0284C7","#10B981","#C5DFF0"],["#050E14","#0B1B26","#122A3B","#F0F9FF","#7AA8C4","#38BDF8","#34D399","#1D4059"]],
+    ["fit-combat-arena","Octagon Crimson & Matte Steel","boxing mma strength powerlifting",["#F5F5F6","#FFFFFF","#E8E8EB","#111114","#54545C","#DC2626","#D97706","#D4D4DA"],["#09090B","#131317","#1D1D24","#FAFAFA","#8E8E99","#EF4444","#F59E0B","#2C2C36"]]
+  ],
+  "travel": [
+    ["travel-bharat-nomad","Grand Trunk Terracotta & Peacock","india-travel transit train bus vlog",["#FDFBF7","#F4EFE6","#FFFFFF","#241914","#6E5A4F","#C85A32","#0F766E","#E6DEC8"],["#0E0A08","#18120E","#241B15","#FAF5EE","#A68E80","#E07A5F","#14B8A6","#362820"]],
+    ["travel-himalayan-expedition","Alpine Glacier & Prayer Flag","trekking mountains ladakh camping",["#F5F8FA","#FFFFFF","#E8EFF5","#0D1B26","#4B6070","#0284C7","#D97706","#CFDCE8"],["#070D14","#0E1926","#17273B","#F0F7FC","#809EB8","#38BDF8","#F59E0B","#223A57"]],
+    ["travel-kyoto-rail","Shinkansen Slate & Stamp Red","rail-pass metro ferry schedule",["#F8F7F4","#EFECE6","#FFFFFF","#141619","#545961","#D92B2B","#1D4ED8","#DCD8CE"],["#0B0C0E","#13161A","#1C2127","#F5F4F0","#8D949E","#F43F5E","#60A5FA","#2A313B"]],
+    ["travel-tropical-archipelago","Andaman Lagoon & Teak","islands southeast-asia ferry coastal",["#F4FBF9","#FFFFFF","#E4F5F0","#09241F","#456962","#0D9488","#EA580C","#C6E8DF"],["#05120F","#0A211C","#11332C","#F0FDFA","#78B8AC","#2DD4BF","#FB923C","#1C4A40"]],
+    ["travel-first-class-lounge","Concorde Midnight & Champagne","aviation hotel-booking concierge",["#FAF9F6","#F1EFEA","#FFFFFF","#12151E","#565B6B","#1E3A8A","#B45309","#DFDCD2"],["#080A10","#101420","#181E30","#F7F5F0","#8C93A8","#D4AF37","#38BDF8","#262F47"]]
+  ],
+  "nft-web3": [
+    ["web3-hologram-vault","Zero-Knowledge Hologram & Void","nft-marketplace collector art-blocks",["#F8FAFF","#FFFFFF","#EDF1FF","#0A0917","#504E75","#6366F1","#EC4899","#DCE3FF"],["#05040D","#0D0A1C","#16112E","#F5F3FF","#9189BA","#00F5D4","#A855F7","#281F52"]],
+    ["web3-solana-ultraviolet","High-TPS Ultraviolet & Mint","solana depin token-launch",["#F6FBF9","#FFFFFF","#E8F7F2","#0C141F","#4C5E70","#9333EA","#10B981","#CEEAE0"],["#06080E","#0D111C","#151B2E","#F2FBF9","#8596B0","#14F195","#9945FF","#222C47"]],
+    ["web3-ordinal-amber","Bitcoin Ordinal & Raw Block","bitcoin inscriptions hash-rate",["#FBF9F5","#F2EFE9","#FFFFFF","#141210","#5E5850","#EA580C","#141210","#E0DAD0"],["#0A0908","#14110E","#1F1A16","#FAF7F2","#9C9085","#F7931A","#FACC15","#332B24"]],
+    ["web3-dao-governance","Protocol Agora & Marble","dao voting governance treasury",["#F7F8FA","#FFFFFF","#EBEEF2","#111622","#525C70","#2563EB","#0D9488","#D8DEE8"],["#090C12","#111622","#1A2233","#F2F5FA","#8894AB","#60A5FA","#2DD4BF","#29354D"]],
+    ["web3-metaverse-prism","Spatial Canvas & Hyper-Cyan","spatial-web 3d-worlds virtual",["#FAF7FF","#FFFFFF","#F2EAFF","#160D29","#5E4F7A","#D946EF","#06B6D4","#E5D4FF"],["#080512","#120B24","#1C1238","#FDF4FF","#A894C7","#F0ABFC","#22D3EE","#332061"]]
+  ],
+  "beauty-spa": [
+    ["beauty-aesop-apothecary","Apothecary Amber & Botanical","skincare apothecary luxury organic",["#F6F4EE","#EBE7DC","#FCFBF8","#211D18","#665E54","#8C583A","#3B5E4C","#DAD3C2"],["#12100D","#1C1814","#26211C","#F2EFE9","#9E9488","#C88A65","#689F82","#332C24"]],
+    ["beauty-velvet-rose","Parisian Rosewater & Silk","cosmetics makeup fragrance",["#FDF9FA","#F7EFEF","#FFFFFF","#241619","#6E555B","#BE185D","#B45309","#EADAD9"],["#130B0D","#1F1216","#2B191F","#FDF2F5","#B08F98","#F472B6","#FBBF24","#3D242C"]],
+    ["beauty-onsen-mineral","Onsen Hinoki & Thermal Stone","spa massage thermal wellness",["#F5F6F4","#EAECE8","#FFFFFF","#1A201C","#5A665E","#3F6E58","#A16207","#D6DBD2"],["#0E1210","#161C19","#202924","#F0F4F1","#8FA195","#68B08E","#EAB308","#2D3B33"]],
+    ["beauty-clinical-derma","Derma Peel & Hyaluronic Pure","dermatology med-spa laser",["#F7FAFC","#FFFFFF","#EDF3F7","#0F1D26","#516673","#0284C7","#0D9488","#D7E4ED"],["#070E14","#0E1B24","#162936","#F0F8FF","#82A3B5","#38BDF8","#2DD4BF","#223E52"]],
+    ["beauty-ayurveda-kumkum","Ayurvedic Kumkumadi & Sandalwood","ayurveda holistic herbal oils",["#FCF9F2","#F4EDE0","#FFFFFF","#261A12","#6E5849","#B45309","#15803D","#E5D8C2"],["#130D09","#1F150F","#2B1E16","#FAF3E8","#A89180","#F59E0B","#4ADE80","#3B291E"]]
+  ],
+  "developer-tools": [
+    ["dev-teenage-chassis","Field Aluminium & Intl Orange","hardware-tool calculator synth",["#E5E5E0","#F2F2EE","#FFFFFF","#111110","#595954","#FF4F00","#0055FF","#111110"],["#0E0E0D","#171715","#22221F","#F2F2EE","#8C8C84","#FF5E1A","#38BDF8","#33332E"]],
+    ["dev-warp-obsidian","Rust Terminal & Amber Forge","cli ide compiler debugger",["#F6F6F4","#FFFFFF","#EAEAE6","#121214","#55555C","#D97706","#2563EB","#D8D8D2"],["#09090B","#111115","#19191F","#F4F4F6","#8A8A96","#F59E0B","#38BDF8","#25252E"]],
+    ["dev-supabase-emerald","Postgres Emerald & Carbon","database backend api-docs",["#F6FAF8","#FFFFFF","#E8F2EE","#0A1712","#486157","#10B981","#4F46E5","#CEE3DA"],["#060A08","#0C1410","#13211B","#ECFDF5","#76A895","#34D399","#818CF8","#1C3329"]],
+    ["dev-grafana-telemetry","Observability Flame & Metric","monitoring logs devops",["#F5F7FA","#FFFFFF","#E8ECF2","#0D131C","#4D596B","#EA580C","#0284C7","#D2DAE6"],["#070A0F","#0E131C","#161E2B","#F0F4FA","#8291A8","#FF6B2B","#38BDF8","#232F42"]],
+    ["dev-monokai-modern","Modern Monokai & Matcha","code-playground regex json",["#F8F7F2","#EFECE4","#FFFFFF","#1C1B18","#615E56","#E11D48","#65A30D","#DDD8CA"],["#10100E","#191916","#24241F","#F8F8F2","#99978B","#FF2A85","#A6E22E","#33332C"]]
+  ],
+  "entertainment": [
+    ["ent-mythic-agni","Mythic Agni & Sacred Bronze","ramayana mythology epic animation",["#FAF6F0","#EFE9DF","#FFFFFF","#1C120D","#6B564B","#B45309","#BE123C","#DFD4C2"],["#090605","#130D0B","#1F1512","#F7EDE8","#9E867B","#D4AF37","#E11D48","#2E201B"]],
+    ["ent-imax-premiere","A24 Editorial & Cinema Noir","film-studio streaming documentary",["#F7F6F2","#ECEAE3","#FFFFFF","#111111","#575652","#B91C1C","#111111","#D8D5CA"],["#050505","#0E0E0E","#181818","#F5F3EE","#8C8A84","#EF4444","#F59E0B","#262626"]],
+    ["ent-webtoon-cel","2.5D Manhwa Cel & Neon Ink","webtoon manhwa anime comics",["#FAF8FF","#FFFFFF","#EFEBFF","#120E21","#554E70","#6D28D9","#F43F5E","#120E21"],["#080610","#110D21","#1B1533","#FAF8FF","#9B92BD","#A855F7","#FF2A85","#2D2352"]],
+    ["ent-symphony-hall","Orchestral Mahogany & Brass","music-production score orchestral",["#FAF7F2","#F0EAE1","#FFFFFF","#1F1712","#66574E","#9A5B25","#1E3A8A","#DFD5C6"],["#0C0907","#16110D","#211914","#F5EFEA","#9E8D82","#E09F3E","#60A5FA","#33271F"]],
+    ["ent-vinyl-hifi","Hi-Fi Warm Tube & VU Meter","podcast radio audio-player",["#F4F2EC","#E8E4DA","#FFFFFF","#171614","#5C5953","#EA580C","#0D9488","#D4CFC2"],["#0D0C0B","#161513","#211F1C","#F2EFE9","#948F86","#FF5500","#14B8A6","#2E2B27"]]
+  ],
+  "legal": [
+    ["legal-chambers-mahogany","Lincoln's Inn Mahogany","law-firm litigation corporate",["#F9F8F5","#F0EDE6","#FFFFFF","#111827","#4B5563","#1E3A8A","#92400E","#D6D2C8"],["#080B12","#101624","#182136","#F8FAFC","#94A3B8","#D4AF37","#60A5FA","#26334D"]],
+    ["legal-patent-ip","Intellectual Property Blueprint","patent trademark legaltech",["#F4F7FA","#FFFFFF","#E8EEF5","#0C1624","#495A70","#0369A1","#0F766E","#CFDCEB"],["#060B12","#0C1522","#132136","#F0F6FC","#7FA0C2","#38BDF8","#2DD4BF","#1E3352"]],
+    ["legal-notary-seal","Supreme Wax Seal & Oxford","constitutional arbitration compliance",["#FCFBF9","#F3F0EA","#FFFFFF","#171717","#575551","#991B1B","#1E3A8A","#DFDBD2"],["#0B0B0C","#141417","#1F1F24","#F7F6F2","#96948E","#EF4444","#D4AF37","#2E2E36"]],
+    ["legal-civic-policy","Public Policy & Diplomatic Slate","think-tank ngo regulation",["#F6F7F8","#ECEEF0","#FFFFFF","#121A21","#515E69","#0F766E","#B45309","#D5DBE0"],["#090D10","#11181F","#19242E","#F2F5F7","#8797A3","#2DD4BF","#F59E0B","#263645"]],
+    ["legal-private-notary","Private Family Office & Olive","estate-planning wealth-trust",["#F8F7F3","#EFECE4","#FFFFFF","#1A211C","#57635A","#2D5A43","#8C6239","#DBD6C8"],["#0C100D","#141C17","#1D2921","#F2F5F3","#8CA192","#52B788","#C5A059","#29382E"]]
+  ],
+  "events": [
+    ["event-bachelor-arcade","Afterhours Neon & Velvet Dare","bachelor-party party-game dares",["#FFFDF5","#FFFFFF","#F4EFE0","#0A0A0A","#4B5563","#A3E635","#8B5CF6","#0A0A0A"],["#0B0614","#150D26","#21153B","#FAF5FF","#A78BFA","#FACC15","#FF2A85","#FACC15"]],
+    ["event-arena-festival","Mainstage Laser & Wristband","music-festival concert ticketing",["#FAF8FF","#FFFFFF","#F0EBFF","#120A1F","#574B6E","#FF0055","#6366F1","#120A1F"],["#07040C","#11091C","#1B0F2E","#FDF4FF","#A892C4","#00F5D4","#FF0055","#321C54"]],
+    ["event-royal-utsav","Royal Mandap Marigold & Sindoor","wedding cultural celebration rsvp",["#FFFBF5","#F7EFE2","#FFFFFF","#291410","#70514A","#C83E2B","#D97706","#EBD8C0"],["#140907","#21100C","#301712","#FFF7ED","#B58E84","#F59E0B","#F43F5E","#45231B"]],
+    ["event-tech-summit","Keynote Stage & Badge Pass","conference hackathon summit",["#F5F7FA","#FFFFFF","#E8ECF2","#0B111E","#4A5568","#2563EB","#10B981","#D2DAE6"],["#060911","#0D1322","#151F36","#F8FAFC","#8A99B5","#38BDF8","#A3E635","#243457"]],
+    ["event-gala-champagne","Black Tie Velvet & Gold","awards-show charity-gala vip",["#FAF9F6","#F2EFE9","#FFFFFF","#141311","#5E5B55","#9A7B3E","#141311","#E0DBD0"],["#080807","#12110F","#1C1A17","#F7F5F0","#999388","#D4AF37","#F43F5E","#2E2A24"]]
+  ],
+  "other": [
+    ["other-bento-neutral","Universal Bento Studio","personal-hub multi-tool dashboard",["#FAFAFA","#FFFFFF","#F2F2F3","#09090B","#52525B","#18181B","#2563EB","#E4E4E7"],["#09090B","#121215","#1C1C21","#FAFAFA","#A1A1AA","#FAFAFA","#38BDF8","#27272A"]],
+    ["other-warm-craft","Artisanal Paper & Ink","notes wiki second-brain pkm",["#FBF9F5","#F2EFE9","#FFFFFF","#1C1A17","#635E56","#C85A32","#2D6A4F","#E2DDD2"],["#11100E","#1A1815","#24211D","#F5F2EB","#999288","#E07A5F","#52B788","#302C26"]],
+    ["other-blueprint-cad","Engineering CAD Blueprint","architecture calculator converter",["#F2F6FA","#FFFFFF","#E4ECF5","#091829","#465E78","#0284C7","#EA580C","#C5D7EB"],["#050E1A","#0A192E","#102645","#EBF5FF","#7AA6D1","#38BDF8","#F97316","#1B3B66"]],
+    ["other-nordic-calm","Scandinavian Slate & Pine","habit-tracker weather utility",["#F6F7F5","#ECEEE9","#FFFFFF","#181E1A","#566159","#2F5E4E","#D97706","#D6DDD8"],["#0D110F","#151C18","#1F2923","#F0F4F1","#8BA193","#52B788","#FBBF24","#2A3830"]],
+    ["other-kinetic-mono","High-Contrast Kinetic Mono","experimental brutalist portfolio",["#FFFFFF","#F0F0F0","#FFFFFF","#000000","#4A4A4A","#000000","#FF3E00","#000000"],["#000000","#111111","#1F1F1F","#FFFFFF","#999999","#FFFFFF","#CCFF00","#FFFFFF"]]
+  ]
+};
+
+// Flatten into 200 standalone items
+const PALETTES = [];
+let idx = 1;
+Object.entries(RAW_CATALOG).forEach(([category, families]) => {
+  families.forEach(([famId, name, vibes, L, D]) => {
+    [["light", L], ["dark", D]].forEach(([mode, c]) => {
+      PALETTES.push({
+        index: idx++,
+        id: `${famId}-${mode}`,
+        familyId: famId,
+        category,
+        name: `${name} (${mode.toUpperCase()})`,
+        mode,
+        vibes,
+        bg: c[0], surface: c[1], elevated: c[2], text: c[3],
+        muted: c[4], accent: c[5], secondary: c[6], border: c[7]
+      });
+    });
+  });
+});
+
+let selectedCat = "all";
+let selectedPalette = PALETTES[1]; // Default Dark Linear
+
+function renderCategories() {
+  const ribbon = document.getElementById("categoryRibbon");
+  const cats = ["all", ...Object.keys(RAW_CATALOG)];
+  ribbon.innerHTML = cats.map(c => `
+    <button class="cat-pill ${c === selectedCat ? 'active' : ''}" onclick="setCategory('${c}')">
+      ${c === 'all' ? 'All 20 Categories (200)' : c.replace('-', ' ').toUpperCase() + ' (10)'}
+    </button>
+  `).join("");
+}
+
+function setCategory(cat) {
+  selectedCat = cat;
+  renderCategories();
+  renderList();
+}
+
+let currentView = 'dashboard';
+let currentExportFormat = 'css';
+
+function switchView(view) {
+  currentView = view;
+  const views = {
+    'dashboard': document.getElementById('viewDashboard'),
+    'landing': document.getElementById('viewLanding'),
+    'kitchen-sink': document.getElementById('viewKitchenSink'),
+    'code-export': document.getElementById('viewCodeExport')
+  };
+  Object.keys(views).forEach(k => {
+    if (views[k]) views[k].style.display = (k === view) ? 'grid' : 'none';
+  });
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('onclick').includes(view));
+  });
+  if (view === 'code-export') renderExportCode();
+}
+
+function relLum(hex) {
+  const c = hex.replace('#', '');
+  const r = parseInt(c.substring(0, 2), 16) / 255;
+  const g = parseInt(c.substring(2, 4), 16) / 255;
+  const b = parseInt(c.substring(4, 6), 16) / 255;
+  const a = [r, g, b].map(v => v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4));
+  return 0.2126 * a[0] + 0.7152 * a[1] + 0.0722 * a[2];
+}
+
+function contrastRatio(h1, h2) {
+  const l1 = relLum(h1);
+  const l2 = relLum(h2);
+  const max = Math.max(l1, l2);
+  const min = Math.min(l1, l2);
+  return (Math.round(((max + 0.05) / (min + 0.05)) * 10) / 10);
+}
+
+function toggleMode() {
+  const targetMode = selectedPalette.mode === 'dark' ? 'light' : 'dark';
+  const pair = PALETTES.find(p => p.familyId === selectedPalette.familyId && p.mode === targetMode);
+  if (pair) applyPalette(pair);
+}
+
+function setExportFormat(fmt) {
+  currentExportFormat = fmt;
+  document.querySelectorAll('.export-tab-btn').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('onclick').includes(fmt));
+  });
+  renderExportCode();
+}
+
+function renderExportCode() {
+  const p = selectedPalette;
+  const box = document.getElementById('codeOutputBox');
+  if (!box) return;
+
+  if (currentExportFormat === 'css') {
+    box.textContent = `:root, [data-theme="${p.mode}"] {\n` +
+      `  --bg-canvas: ${p.bg};\n` +
+      `  --bg-surface: ${p.surface};\n` +
+      `  --bg-elevated: ${p.elevated};\n` +
+      `  --text-primary: ${p.text};\n` +
+      `  --text-muted: ${p.muted};\n` +
+      `  --accent-primary: ${p.accent};\n` +
+      `  --accent-secondary: ${p.secondary};\n` +
+      `  --border-color: ${p.border};\n` +
+      `  --chart-1: ${p.accent};\n` +
+      `  --chart-2: ${p.secondary};\n` +
+      `  --radius-card: 14px;\n` +
+      `  --shadow-rim: inset 0 1px 0 0 rgba(255,255,255,${p.mode === 'dark' ? '0.09' : '0.6'});\n` +
+      `  --shadow-glow: 0 0 24px -4px ${p.accent};\n` +
+      `}`;
+  } else if (currentExportFormat === 'shadcn') {
+    box.textContent = `@layer base {\n` +
+      `  :root {\n` +
+      `    --background: ${p.bg};\n` +
+      `    --foreground: ${p.text};\n` +
+      `    --card: ${p.surface};\n` +
+      `    --card-foreground: ${p.text};\n` +
+      `    --popover: ${p.surface};\n` +
+      `    --popover-foreground: ${p.text};\n` +
+      `    --primary: ${p.accent};\n` +
+      `    --primary-foreground: #FFFFFF;\n` +
+      `    --secondary: ${p.elevated};\n` +
+      `    --secondary-foreground: ${p.text};\n` +
+      `    --muted: ${p.elevated};\n` +
+      `    --muted-foreground: ${p.muted};\n` +
+      `    --accent: ${p.elevated};\n` +
+      `    --accent-foreground: ${p.text};\n` +
+      `    --border: ${p.border};\n` +
+      `    --input: ${p.border};\n` +
+      `    --ring: ${p.accent};\n` +
+      `  }\n` +
+      `}`;
+  } else if (currentExportFormat === 'tailwind') {
+    box.textContent = `// tailwind.config.js\n` +
+      `module.exports = {\n` +
+      `  theme: {\n` +
+      `    extend: {\n` +
+      `      colors: {\n` +
+      `        canvas: 'var(--bg-canvas)',\n` +
+      `        surface: 'var(--bg-surface)',\n` +
+      `        elevated: 'var(--bg-elevated)',\n` +
+      `        primary: 'var(--text-primary)',\n` +
+      `        muted: 'var(--text-muted)',\n` +
+      `        accent: {\n` +
+      `          DEFAULT: 'var(--accent-primary)',\n` +
+      `          secondary: 'var(--accent-secondary)'\n` +
+      `        },\n` +
+      `        border: 'var(--border-color)'\n` +
+      `      }\n` +
+      `    }\n` +
+      `  }\n` +
+      `};`;
+  } else if (currentExportFormat === 'tailwind-v4') {
+    box.textContent = `@import "tailwindcss";\n\n` +
+      `@theme {\n` +
+      `  --color-canvas: var(--bg-canvas);\n` +
+      `  --color-surface: var(--bg-surface);\n` +
+      `  --color-elevated: var(--bg-elevated);\n` +
+      `  --color-primary: var(--text-primary);\n` +
+      `  --color-muted: var(--text-muted);\n` +
+      `  --color-accent: var(--accent-primary);\n` +
+      `  --color-accent-secondary: var(--accent-secondary);\n` +
+      `  --color-border: var(--border-color);\n` +
+      `}`;
+  } else if (currentExportFormat === 'motion') {
+    box.textContent = `// Framer Motion Presets\n` +
+      `export const fadeInUp = {\n` +
+      `  initial: { opacity: 0, y: 16 },\n` +
+      `  animate: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } }\n` +
+      `};\n\n` +
+      `export const scaleIn = {\n` +
+      `  initial: { opacity: 0, scale: 0.95 },\n` +
+      `  animate: { opacity: 1, scale: 1, transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] } }\n` +
+      `};`;
+  }
+}
+
+function copyCurrentCode() {
+  const box = document.getElementById('codeOutputBox');
+  if (box && box.textContent) {
+    navigator.clipboard.writeText(box.textContent);
+    const btn = document.getElementById('copyCodeInnerBtn');
+    if (btn) {
+      btn.textContent = 'Copied Code!';
+      setTimeout(() => btn.textContent = 'Copy to Clipboard', 1500);
+    }
+  }
+}
+
+function applyPalette(p) {
+  selectedPalette = p;
+  document.documentElement.setAttribute('data-theme', p.mode);
+  const r = document.documentElement.style;
+  r.setProperty("--bg-canvas", p.bg);
+  r.setProperty("--bg-surface", p.surface);
+  r.setProperty("--bg-elevated", p.elevated);
+  r.setProperty("--text-primary", p.text);
+  r.setProperty("--text-muted", p.muted);
+  r.setProperty("--accent-primary", p.accent);
+  r.setProperty("--accent-secondary", p.secondary);
+  r.setProperty("--border-color", p.border);
+  r.setProperty("--shadow-glow", `0 0 24px -4px ${p.accent}`);
+  r.setProperty("--shadow-rim", `inset 0 1px 0 0 rgba(255,255,255,${p.mode === 'dark' ? '0.09' : '0.6'})`);
+
+  const textContrast = contrastRatio(p.text, p.surface);
+  const accentContrast = contrastRatio(p.accent, p.surface);
+
+  document.getElementById("activeCategoryBadge").textContent = `${p.category.toUpperCase()} • ${p.mode.toUpperCase()}`;
+  document.getElementById("activePaletteId").textContent = `#${p.index} — ${p.id}`;
+  document.getElementById("hudTextContrast").textContent = `${textContrast}:1`;
+  document.getElementById("hudTextRating").textContent = textContrast >= 7.0 ? 'AAA' : 'AA';
+  document.getElementById("hudAccentContrast").textContent = `${accentContrast}:1`;
+  document.getElementById("hudAccentRating").textContent = accentContrast >= 3.0 ? 'AA UI' : 'Non-text';
+  document.getElementById("hudVibes").textContent = p.vibes;
+
+  const tokens = [
+    ["--bg-canvas", p.bg], ["--bg-surface", p.surface], ["--bg-elevated", p.elevated],
+    ["--text-primary", p.text], ["--text-muted", p.muted], ["--accent-primary", p.accent],
+    ["--accent-secondary", p.secondary], ["--border-color", p.border]
+  ];
+  const chipsEl = document.getElementById("tokenChips");
+  if (chipsEl) {
+    chipsEl.innerHTML = tokens.map(([k, v]) => `
+      <span class="token-chip"><i class="dot" style="background:${v}; border:1px solid rgba(128,128,128,0.4);"></i> ${k}: <strong>${v}</strong></span>
+    `).join("");
+  }
+
+  renderExportCode();
+  renderList();
+}
+
+function renderList() {
+  const q = document.getElementById("searchInput").value.toLowerCase();
+  const mode = document.getElementById("modeFilter").value;
+  const filtered = PALETTES.filter(p => {
+    if (selectedCat !== "all" && p.category !== selectedCat) return false;
+    if (mode !== "all" && p.mode !== mode) return false;
+    if (q && !(`${p.id} ${p.name} ${p.vibes} ${p.category}`).toLowerCase().includes(q)) return false;
+    return true;
+  });
+  document.getElementById("counterBadge").textContent = `${filtered.length} / 200 Palettes`;
+  document.getElementById("paletteList").innerHTML = filtered.map(p => `
+    <div class="palette-item ${p.id === selectedPalette.id ? 'selected' : ''}" onclick='applyPalette(${JSON.stringify(p)})'>
+      <div style="display:flex; justify-content:space-between; font-size:0.82rem; font-weight:600;">
+        <span>${p.index}. ${p.name}</span>
+        <span style="font-family:var(--font-mono); font-size:0.7rem; opacity:0.75;">${p.category}</span>
+      </div>
+      <div class="swatch-strip">
+        <span style="background:${p.bg}"></span>
+        <span style="background:${p.surface}"></span>
+        <span style="background:${p.text}"></span>
+        <span style="background:${p.accent}"></span>
+        <span style="background:${p.secondary}"></span>
+      </div>
+    </div>
+  `).join("");
+}
+
+document.getElementById("searchInput").addEventListener("input", renderList);
+document.getElementById("modeFilter").addEventListener("change", renderList);
+document.getElementById("copyCodeBtn").addEventListener("click", () => {
+  switchView('code-export');
+  copyCurrentCode();
+});
+
+renderCategories();
+applyPalette(selectedPalette);
+</script>
+</body>
+</html>

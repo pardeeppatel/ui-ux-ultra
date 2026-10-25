@@ -1,0 +1,53 @@
+{
+  "name": "ui-ux-ultra",
+  "version": "1.0.0",
+  "description": "200-Palette Dual-Theme Design Intelligence, UX Laws & Multi-Platform Theme Compiler for Google Antigravity, Cursor, Claude Code, Flutter, SwiftUI & Tailwind",
+  "main": "bin/cli.js",
+  "bin": {
+    "ui-ux-ultra": "./bin/cli.js"
+  },
+  "scripts": {
+    "start": "node bin/cli.js --preview",
+    "preview": "node bin/cli.js --preview",
+    "install:global": "node bin/cli.js --global",
+    "install:cursor": "node bin/cli.js --cursor",
+    "install:claude": "node bin/cli.js --claude",
+    "export": "node bin/cli.js --export"
+  },
+  "files": [
+    "bin/",
+    "skill/",
+    "previewer/",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [
+    "antigravity",
+    "agent-skill",
+    "ui-ux",
+    "design-system",
+    "design-tokens",
+    "ux-laws",
+    "tailwind",
+    "tailwindcss-v4",
+    "shadcn-ui",
+    "flutter",
+    "swiftui",
+    "cursor",
+    "claude-code",
+    "windsurf",
+    "color-palettes",
+    "wcag-aaa",
+    "toolnplay"
+  ],
+  "author": "Pardeep Kumar <https://ToolNPlay.com>",
+  "homepage": "https://ToolNPlay.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PardeepPatel/ui-ux-ultra.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PardeepPatel/ui-ux-ultra/issues"
+  },
+  "license": "MIT"
+}

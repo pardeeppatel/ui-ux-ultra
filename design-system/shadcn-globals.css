@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   UI-UX-ULTRA v3.5 — SHADCN UI COMPATIBLE GLOBALS.CSS
+   Family: travel-bharat-nomad
+   ========================================================================== */
+
+@layer base {
+  :root {
+    --background: #FDFBF7;
+    --foreground: #241914;
+    --card: #F4EFE6;
+    --card-foreground: #241914;
+    --popover: #F4EFE6;
+    --popover-foreground: #241914;
+    --primary: #C85A32;
+    --primary-foreground: #0B0F19;
+    --secondary: #FFFFFF;
+    --secondary-foreground: #241914;
+    --muted: #FFFFFF;
+    --muted-foreground: #6E5A4F;
+    --accent: #FFFFFF;
+    --accent-foreground: #241914;
+    --destructive: #DC2626;
+    --destructive-foreground: #FFFFFF;
+    --border: #E6DEC8;
+    --input: #E6DEC8;
+    --ring: #C85A32;
+    --radius: 0.625rem;
+    --chart-1: #C85A32;
+    --chart-2: #0F766E;
+    --chart-3: #F59E0B;
+    --chart-4: #10B981;
+    --chart-5: #6366F1;
+  }
+
+  .dark, [data-theme="dark"] {
+    --background: #0E0A08;
+    --foreground: #FAF5EE;
+    --card: #18120E;
+    --card-foreground: #FAF5EE;
+    --popover: #18120E;
+    --popover-foreground: #FAF5EE;
+    --primary: #E07A5F;
+    --primary-foreground: #08090C;
+    --secondary: #241B15;
+    --secondary-foreground: #FAF5EE;
+    --muted: #241B15;
+    --muted-foreground: #A68E80;
+    --accent: #241B15;
+    --accent-foreground: #FAF5EE;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --border: #362820;
+    --input: #362820;
+    --ring: #E07A5F;
+    --chart-1: #E07A5F;
+    --chart-2: #14B8A6;
+    --chart-3: #FBBF24;
+    --chart-4: #34D399;
+    --chart-5: #818CF8;
+  }
+}
