@@ -14,78 +14,93 @@ A comprehensive design intelligence engine featuring **200 curated, dual-theme p
 
 ---
 
-## 1. Mandatory Execution Workflow
+## 1. The Core USP: Mandatory Two-Phase Workflow (HARD STOP RULE)
 
-Whenever the user asks to create, design, build, or re-style any UI, website, web application, dashboard, or developer tool, you **MUST** follow these steps in exact order:
+UI/UX Ultra's main USP is that **it gives the user full visual control over their brand identity before any application code is written**.
+
+To protect this USP, AI agents **MUST ALWAYS follow this strict TWO-PHASE protocol**:
 
 ```mermaid
-flowchart LR
-    A["1. Detect Domain & Vibe"] --> B["2. Run Synthesis Engine"]
-    B --> C["3. Inject Tokens & Theme"]
-    C --> D["4. Configure Tailwind / CSS"]
-    D --> E["5. Typography & UI Style"]
-    E --> F["6. Build & Verify WCAG"]
+sequenceDiagram
+    autonumber
+    actor User
+    participant AI as AI Agent
+    participant Engine as UI/UX Ultra Engine
+    
+    Note over User,AI: PHASE 1: Theme Selection & Visual Preview (MANDATORY STOP)
+    User->>AI: "Build a SaaS app using ui-ux-ultra"
+    AI->>Engine: Run design_engine.py --html ./theme_preview.html
+    Engine-->>AI: Recommended palette + All alternatives + preview HTML
+    AI->>User: Renders live interactive embed + lists ALL alternatives + asks for choice
+    Note over AI: 🛑 HARD STOP: AI ends turn immediately! Does NOT build yet!
+    
+    Note over User,AI: PHASE 2: Project Implementation (Only After User Approves)
+    User->>AI: "Looks great, let's go with Dual Mode" (or "Switch to Stripe Violet")
+    AI->>Engine: Compile chosen theme tokens (--persist)
+    AI->>User: Scaffolds & builds application using confirmed tokens
 ```
 
-### Step 1: Detect Domain & Context
-Extract three critical inputs from the user's project description or prompt:
-1. **Industry / Domain Category**: Choose from the 20 supported categories (e.g. `saas`, `fintech-crypto`, `ai-chatbot`, `developer-tools`, `healthcare`, `e-commerce`, etc.).
-2. **Vibe & Aesthetic Keywords**: e.g., `modern precision`, `luxury editorial`, `high-voltage neon`, `calm botanical`, `command-bar`.
-3. **Polarity Preference**: Light mode, Dark mode, or Dual (both). Default to **Dual**.
+---
 
-### Step 2: Run the Synthesis Engine & Generate Live HTML Preview (REQUIRED)
-Execute the Python synthesis engine to find the optimal palette match and compile the live interactive HTML preview in one step:
+### 🛑 PHASE 1: Preview & Theme Selection Protocol (CURRENT TURN)
+
+When the user asks to build, create, or design any website, dashboard, or app:
+
+#### Step 1: Detect Domain & Run Synthesis Engine
+Extract the domain category (e.g. `saas`, `travel`, `healthcare`, `fintech-crypto`, etc.) and run the design engine to generate the interactive preview HTML:
 
 ```bash
-# Locate design_engine.py in ~/.gemini/config/skills/ui-ux-ultra/scripts/ or workspace
-python3 ~/.gemini/config/skills/ui-ux-ultra/scripts/design_engine.py "<keywords>" --category <category> --html ./theme_preview.html --persist --audit -p "<Project Name>"
+# Locate design_engine.py in ~/.gemini/config/skills/ui-ux-ultra/scripts/ (or workspace)
+python3 ~/.gemini/config/skills/ui-ux-ultra/scripts/design_engine.py "<keywords>" --category <category> --html ./theme_preview.html
 ```
 
-**Options**:
-- `--category <name>`: Filter by industry category (`saas`, `fintech-crypto`, `ai-chatbot`, `travel`, `healthcare`, etc.)
-- `--mode <light|dark|both>`: Select mode (default `both`)
-- `--palette-id <id>`: Target an exact palette or family ID (e.g. `saas-linear-indigo`, `ai-velvet-cosmos`)
-- `--html <path>`: Generates a complete, self-contained interactive HTML preview widget with clickable Light/Dark toggle and alternative selectors.
-- `--audit`: Output real-time WCAG 2.1 contrast ratios and rating.
-- `--persist`: Automatically compiles tokens into `./design-system/`:
-  - `design-system/theme-tokens.css`: CSS Variables for `:root, [data-theme="light"]` and `[data-theme="dark"]`
-  - `design-system/shadcn-globals.css`: Drop-in Shadcn UI / Radix compatible theme
-  - `design-system/tailwind.tokens.js`: Ready-to-import Tailwind CSS v3 color map
-  - `design-system/tailwind-v4.css`: Modern Tailwind CSS v4 `@theme` configuration
-  - `design-system/flutter_theme.dart`: Material 3 ThemeData with light & dark ColorSchemes
-  - `design-system/Theme.swift`: SwiftUI semantic Color extensions & iOS HIG constants
-  - `design-system/motion.tokens.js`: Framer Motion spring presets and easing curves
-  - `design-system/theme-toggle.js`: Zero-flash client-side theme switcher
-  - `design-system/preview.html`: Interactive theme preview widget
-  - `design-system/MASTER.md`: Design system documentation and token reference
-
-### Step 2b: Present Live Interactive Preview in Chat (MANDATORY)
-
-> ⛔ **CRITICAL INSTRUCTION FOR AI AGENTS: DO NOT CALL `ask_question` TOOL!**  
-> **Never** use the `ask_question` tool to ask the user which palette or polarity to pick. Calling `ask_question` pops up a blocking modal dialog with plain text radio buttons, which completely suppresses the visual preview!  
-> **Always** render the interactive preview directly in your chat response using `<agent-embed>` and ask questions in normal markdown text below it.
-
-#### Exact Response Protocol for AI:
-1. **Render the Live Interactive HTML Embed**:
-   Create the preview HTML (using `--html ./theme_preview.html` or writing an HTML file) and embed it directly in chat:
+#### Step 2: Present the Interactive Embed & Alternatives in Chat
+In your chat response, you **MUST**:
+1. **Render the Live Interactive Embed**:
    ```html
    <agent-embed src="file:///absolute/path/to/theme_preview.html"></agent-embed>
    ```
-2. **Detail the #1 Recommended Palette**:
-   Highlight its display name, family ID, light/dark accent colors, and WCAG contrast rating.
-3. **List ALL Available Category Alternatives**:
-   Rather than mentioning only 2 alternatives, **list ALL available alternative families in that vertical** (all 4-5 palettes in the domain catalog) with their Family IDs, Display Names, Accents, and Vibes.
-4. **Ask for Polarity Preference in Plain Markdown Text**:
-   Write the polarity question directly in your markdown response (NOT inside a modal tool):
-   > **🌓 Theme Polarity Preference:**
+2. **Detail the #1 Recommended Palette**: Display name, family ID, light/dark accent colors, and WCAG contrast rating.
+3. **List ALL Available Alternatives in that Category**: Detail all 4-5 alternative families in that vertical with their family IDs, display names, accents, and specific vibes.
+4. **Ask the User for Theme & Polarity Choice in Plain Markdown Text**:
+   > **🌓 Theme & Polarity Selection:**
    > - **(Recommended) Support for Both (Dual Light & Dark with toggle)** — *Modern production standard with zero-flash toggle and system preference auto-detection.*
    > - **Dark Mode only** — *Sleek, high-focus obsidian aesthetic.*
    > - **Light Mode only** — *Crisp daylight clarity and high-contrast readability.*
    >
-   > *Would you like to proceed with the recommended palette in **Dual Mode**, or prefer Light/Dark only?*
+   > *Would you like to proceed with the recommended palette in **Dual Mode**, or switch to one of the alternatives above?*
 
-### Step 3: Inject Semantic Design Tokens
-Import or paste `design-system/theme-tokens.css` into your main stylesheet. All UI elements must reference these semantic tokens rather than raw hardcoded hex codes:
+#### ⛔ MANDATORY HARD STOP (DO NOT BUILD CODE YET!):
+- **DO NOT** write application code (HTML, JSX, TSX, CSS).
+- **DO NOT** scaffold the project or create repository files.
+- **DO NOT** call the `ask_question` modal tool (which covers the chat with plain text buttons).
+- **END YOUR TURN IMMEDIATELY** after outputting the preview embed and the questions above. Wait for the user's response!
+
+---
+
+### 🚀 PHASE 2: Code Implementation (NEXT TURN — AFTER USER REPLIES)
+
+Only **after** the user replies to confirm their theme choice or select an alternative, proceed with building the project:
+
+#### Step 3: Compile Design Tokens & Output Bundle
+Run the synthesis engine with `--persist` targeting the user's confirmed palette:
+```bash
+python3 ~/.gemini/config/skills/ui-ux-ultra/scripts/design_engine.py --palette-id <confirmed-id> --persist -p "<Project Name>"
+```
+
+This compiles:
+- `design-system/theme-tokens.css`: Standard CSS custom properties for light & dark modes
+- `design-system/shadcn-globals.css`: Drop-in `globals.css` with HSL variables for shadcn/ui
+- `design-system/tailwind-v4.css`: Modern Tailwind CSS v4 `@theme` configuration
+- `design-system/tailwind.tokens.js`: Ready-to-import Tailwind CSS v3 color map
+- `design-system/flutter_theme.dart`: Material 3 ThemeData with light & dark ColorSchemes
+- `design-system/Theme.swift`: SwiftUI semantic Color extensions & iOS HIG constants
+- `design-system/motion.tokens.js`: Framer Motion spring presets and easing curves
+- `design-system/theme-toggle.js`: Zero-flash client-side theme switcher
+- `design-system/MASTER.md`: Design system documentation and token reference
+
+#### Step 4: Inject Semantic Design Tokens into the Project
+Import `design-system/theme-tokens.css` into the project's main stylesheet. All UI elements must reference these semantic tokens rather than raw hardcoded hex codes:
 
 ```css
 :root, [data-theme="light"] {
