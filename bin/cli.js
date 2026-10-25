@@ -71,25 +71,32 @@ if (hasEngineFlags && !args.includes("--global") && !args.includes("-g") && !arg
   child.on("exit", code => process.exit(code || 0));
 } else {
   // Installation mode
-  let targetBase;
+  const homeDir = process.env.HOME || process.env.USERPROFILE;
+  const targets = [];
+
   if (args.includes("--global") || args.includes("-g")) {
-    targetBase = path.join(process.env.HOME || process.env.USERPROFILE, ".gemini", "antigravity", "skills", "ui-ux-ultra");
+    // Official Antigravity global custom skill discovery paths
+    targets.push(path.join(homeDir, ".gemini", "config", "skills", "ui-ux-ultra"));
+    targets.push(path.join(homeDir, ".gemini", "antigravity", "skills", "ui-ux-ultra"));
   } else if (args.includes("--cursor")) {
-    targetBase = path.join(process.cwd(), ".cursor", "skills", "ui-ux-ultra");
+    targets.push(path.join(process.cwd(), ".cursor", "skills", "ui-ux-ultra"));
   } else if (args.includes("--claude")) {
-    targetBase = path.join(process.cwd(), ".claude", "skills", "ui-ux-ultra");
+    targets.push(path.join(process.cwd(), ".claude", "skills", "ui-ux-ultra"));
   } else if (args.includes("--gemini")) {
-    targetBase = path.join(process.cwd(), ".gemini", "skills", "ui-ux-ultra");
+    targets.push(path.join(process.cwd(), ".agents", "skills", "ui-ux-ultra"));
+    targets.push(path.join(homeDir, ".gemini", "config", "skills", "ui-ux-ultra"));
   } else {
-    targetBase = path.join(process.cwd(), ".agents", "skills", "ui-ux-ultra");
+    // Default workspace install (.agents/skills/ for Antigravity, Cursor & Claude)
+    targets.push(path.join(process.cwd(), ".agents", "skills", "ui-ux-ultra"));
   }
 
   const sourceSkill = path.join(__dirname, "..", "skill");
 
-  fs.mkdirSync(targetBase, { recursive: true });
-  fs.cpSync(sourceSkill, targetBase, { recursive: true });
-
-  console.log(`\n✅ UI/UX Ultra v1.0.0 (by ToolNPlay.com & Pardeep Kumar) installed to:`);
-  console.log(`   ${targetBase}\n`);
-  console.log(`   ${targetBase}\n`);
+  for (const targetBase of targets) {
+    fs.mkdirSync(targetBase, { recursive: true });
+    fs.cpSync(sourceSkill, targetBase, { recursive: true });
+    console.log(`\n✅ UI/UX Ultra v1.0.0 (by ToolNPlay.com & Pardeep Kumar) installed to:`);
+    console.log(`   ${targetBase}`);
+  }
+  console.log(`\n🎉 Skill is ready! In Antigravity, simply ask: "Build a SaaS app using ui-ux-ultra"\n`);
 }

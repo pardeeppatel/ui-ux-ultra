@@ -1,6 +1,8 @@
 ---
 name: ui-ux-ultra
-description: Advanced 200-Palette Design Intelligence, UX Laws & Multi-Platform Theme Compiler (v1.0.0). Created by Pardeep Kumar and powered by ToolNPlay.com. Covers 20 industry categories with Dual Light & Dark modes, WCAG AAA telemetry, Flutter, SwiftUI, Tailwind v3/v4, and Shadcn UI.
+description: >-
+  Advanced 200-palette design intelligence, UX laws, and multi-platform theme compiler by Pardeep Kumar (ToolNPlay.com).
+  Use this skill whenever the user asks to create, build, style, design, or re-theme any website, landing page, SaaS application, dashboard, or mobile app (Flutter, SwiftUI, React Native, Next.js), or mentions "ui ux ultra", "ui-ux-ultra", "ui ux", "design system", "color palette", "theme", or "Tailwind".
 ---
 
 # UI/UX Ultra v1.0.0 — Design Intelligence & Multi-Platform Theme Compiler
