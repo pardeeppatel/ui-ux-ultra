@@ -33,21 +33,19 @@ Extract three critical inputs from the user's project description or prompt:
 2. **Vibe & Aesthetic Keywords**: e.g., `modern precision`, `luxury editorial`, `high-voltage neon`, `calm botanical`, `command-bar`.
 3. **Polarity Preference**: Light mode, Dark mode, or Dual (both). Default to **Dual**.
 
-### Step 2: Run the Synthesis Engine (REQUIRED)
-Execute the Python synthesis engine to find the optimal palette match and compile project tokens:
+### Step 2: Run the Synthesis Engine & Generate Live HTML Preview (REQUIRED)
+Execute the Python synthesis engine to find the optimal palette match and compile the live interactive HTML preview in one step:
 
 ```bash
-# Workspace local installation
-python3 .agents/skills/ui-ux-ultra/scripts/design_engine.py "<keywords>" --category <category> --persist --audit -p "<Project Name>"
-
-# Or via npm/npx
-npx ui-ux-ultra "<keywords>" --category <category> --persist --audit -p "<Project Name>"
+# Locate design_engine.py in ~/.gemini/config/skills/ui-ux-ultra/scripts/ or workspace
+python3 ~/.gemini/config/skills/ui-ux-ultra/scripts/design_engine.py "<keywords>" --category <category> --html ./theme_preview.html --persist --audit -p "<Project Name>"
 ```
 
 **Options**:
-- `--category <name>`: Filter by industry category (`saas`, `fintech-crypto`, `ai-chatbot`, etc.)
+- `--category <name>`: Filter by industry category (`saas`, `fintech-crypto`, `ai-chatbot`, `travel`, `healthcare`, etc.)
 - `--mode <light|dark|both>`: Select mode (default `both`)
 - `--palette-id <id>`: Target an exact palette or family ID (e.g. `saas-linear-indigo`, `ai-velvet-cosmos`)
+- `--html <path>`: Generates a complete, self-contained interactive HTML preview widget with clickable Light/Dark toggle and alternative selectors.
 - `--audit`: Output real-time WCAG 2.1 contrast ratios and rating.
 - `--persist`: Automatically compiles tokens into `./design-system/`:
   - `design-system/theme-tokens.css`: CSS Variables for `:root, [data-theme="light"]` and `[data-theme="dark"]`
@@ -58,21 +56,27 @@ npx ui-ux-ultra "<keywords>" --category <category> --persist --audit -p "<Projec
   - `design-system/Theme.swift`: SwiftUI semantic Color extensions & iOS HIG constants
   - `design-system/motion.tokens.js`: Framer Motion spring presets and easing curves
   - `design-system/theme-toggle.js`: Zero-flash client-side theme switcher
+  - `design-system/preview.html`: Interactive theme preview widget
   - `design-system/MASTER.md`: Design system documentation and token reference
 
-### Step 2b: Present Visual Preview, All Category Alternatives & Polarity Selection (MANDATORY)
-Before writing UI code, the agent **MUST** present a true visual preview of the #1 recommended palette, list **ALL** alternative options available in that category, and resolve the user's polarity preference (Light, Dark, or Both):
+### Step 2b: Present Live Interactive Preview in Chat (MANDATORY)
 
-#### Response Protocol for AI:
-1. **Interactive Visual Preview**:
-   - Embed the interactive preview widget or display the live rendered UI card.
-   - Show the primary CTA button, secondary buttons, and WCAG AAA contrast indicator badge.
-2. **All Available Category Alternatives (Complete Visibility)**:
-   - Rather than mentioning only 2 alternatives, **mention ALL available alternative families in that vertical/category** (all 4-5 palettes in the domain catalog).
-   - For each alternative, provide its **Family ID**, **Display Name**, **Light/Dark Accent Colors**, and **Specific Aesthetic Vibe**.
-   - This ensures the user has immediate access to the full spectrum of curated choices in that industry.
-3. **Polarity Choice & Recommendation**:
-   If the user did not explicitly specify "light only" or "dark only", the AI **MUST** ask the user:
+> ⛔ **CRITICAL INSTRUCTION FOR AI AGENTS: DO NOT CALL `ask_question` TOOL!**  
+> **Never** use the `ask_question` tool to ask the user which palette or polarity to pick. Calling `ask_question` pops up a blocking modal dialog with plain text radio buttons, which completely suppresses the visual preview!  
+> **Always** render the interactive preview directly in your chat response using `<agent-embed>` and ask questions in normal markdown text below it.
+
+#### Exact Response Protocol for AI:
+1. **Render the Live Interactive HTML Embed**:
+   Create the preview HTML (using `--html ./theme_preview.html` or writing an HTML file) and embed it directly in chat:
+   ```html
+   <agent-embed src="file:///absolute/path/to/theme_preview.html"></agent-embed>
+   ```
+2. **Detail the #1 Recommended Palette**:
+   Highlight its display name, family ID, light/dark accent colors, and WCAG contrast rating.
+3. **List ALL Available Category Alternatives**:
+   Rather than mentioning only 2 alternatives, **list ALL available alternative families in that vertical** (all 4-5 palettes in the domain catalog) with their Family IDs, Display Names, Accents, and Vibes.
+4. **Ask for Polarity Preference in Plain Markdown Text**:
+   Write the polarity question directly in your markdown response (NOT inside a modal tool):
    > **🌓 Theme Polarity Preference:**
    > - **(Recommended) Support for Both (Dual Light & Dark with toggle)** — *Modern production standard with zero-flash toggle and system preference auto-detection.*
    > - **Dark Mode only** — *Sleek, high-focus obsidian aesthetic.*

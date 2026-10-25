@@ -1042,6 +1042,249 @@ def generate_preview_svg(rec_light, rec_dark, alts):
     svg += "  </g>\n</svg>"
     return svg
 
+def generate_preview_html(light_p, dark_p, alt_fams):
+    rec_name = light_p['name'].replace(' (Light)', '')
+    cat = light_p.get('category', 'app').upper()
+    contrast_dark = dark_p.get('contrast_text', 16.8)
+    
+    themes_js = {
+        "rec": {
+            "title": rec_name,
+            "badge": f"RECOMMENDED • {cat}",
+            "vibes": light_p['vibes'],
+            "statVal": f"{rec_name} Active",
+            "statSub": f"WCAG {light_p.get('wcag_rating', 'AAA Pass')}",
+            "darkSurface": dark_p['surface'],
+            "darkBorder": dark_p['border'],
+            "darkBg": dark_p['bg'],
+            "darkAccent": dark_p['accent'],
+            "darkAccentText": "#08090C" if contrast_ratio(dark_p['accent'], "#FFFFFF") < contrast_ratio(dark_p['accent'], "#08090C") else "#FFFFFF",
+            "darkSecondary": dark_p['secondary'],
+            "lightSurface": light_p['surface'],
+            "lightBorder": light_p['border'],
+            "lightBg": light_p['bg'],
+            "lightAccent": light_p['accent'],
+            "lightAccentText": "#0B0F19" if contrast_ratio(light_p['accent'], "#FFFFFF") < contrast_ratio(light_p['accent'], "#0B0F19") else "#FFFFFF",
+            "lightSecondary": light_p['secondary']
+        }
+    }
+    
+    alts_html = ""
+    for idx, alt in enumerate(alt_fams):
+        key = f"alt_{idx}"
+        fid = alt["family_id"]
+        alp = next((p for p in ALL_200_PALETTES if p["family_id"] == fid and p["mode"] == "light"), light_p)
+        adp = next((p for p in ALL_200_PALETTES if p["family_id"] == fid and p["mode"] == "dark"), dark_p)
+        
+        themes_js[key] = {
+            "title": alt["name"],
+            "badge": f"ALTERNATIVE {idx+1} • {cat}",
+            "vibes": alt["vibes"],
+            "statVal": f"{alt['name']} Selected",
+            "statSub": f"WCAG {adp.get('wcag_rating', 'AAA Pass')}",
+            "darkSurface": adp['surface'],
+            "darkBorder": adp['border'],
+            "darkBg": adp['bg'],
+            "darkAccent": adp['accent'],
+            "darkAccentText": "#08090C" if contrast_ratio(adp['accent'], "#FFFFFF") < contrast_ratio(adp['accent'], "#08090C") else "#FFFFFF",
+            "darkSecondary": adp['secondary'],
+            "lightSurface": alp['surface'],
+            "lightBorder": alp['border'],
+            "lightBg": alp['bg'],
+            "lightAccent": alp['accent'],
+            "lightAccentText": "#0B0F19" if contrast_ratio(alp['accent'], "#FFFFFF") < contrast_ratio(alp['accent'], "#0B0F19") else "#FFFFFF",
+            "lightSecondary": alp['secondary']
+        }
+        
+        alts_html += f"""
+      <div onclick="selectTheme('{key}')" class="p-3 rounded-lg bg-[#0E1016] border border-[#1F2433] hover:border-white/30 cursor-pointer transition-all">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-xs font-semibold flex items-center gap-1.5" style="color: {alt['dark_accent']};">
+            <span class="w-2.5 h-2.5 rounded-full inline-block" style="background-color: {alt['dark_accent']};"></span>
+            {alt['name']}
+          </span>
+          <span class="text-[10px] font-mono text-[#8C93A8]">{fid}</span>
+        </div>
+        <p class="text-[11px] text-[#8C93A8] leading-tight">{alt['vibes']}</p>
+      </div>"""
+
+    themes_json_str = json.dumps(themes_js, indent=2)
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+    body {{ font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; }}
+    .display-font {{ font-family: 'Space Grotesk', -apple-system, sans-serif; }}
+    .rim-card {{ box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1); }}
+  </style>
+</head>
+<body class="bg-transparent text-[#F7F5F0] antialiased p-2">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-3 max-w-4xl mx-auto">
+    <!-- Main Recommended Card (Span 7) -->
+    <div id="mainPreviewCard" class="md:col-span-7 bg-[#101420] border border-[#262F47] rounded-xl p-5 rim-card transition-all duration-200">
+      <div class="flex items-center justify-between mb-3">
+        <span id="themeBadge" class="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded transition-all">
+          RECOMMENDED • {cat}
+        </span>
+        <div class="flex items-center gap-2">
+          <button id="toggleBtn" onclick="toggleModePolarity()" class="text-xs font-semibold px-2.5 py-1 rounded border transition-all">
+            🌓 Toggle Light/Dark
+          </button>
+          <span class="text-xs font-mono text-[#10B981] flex items-center gap-1">
+            <span class="w-2 h-2 rounded-full bg-[#10B981] inline-block animate-pulse"></span>
+            WCAG AAA ({contrast_dark}:1)
+          </span>
+        </div>
+      </div>
+
+      <h3 id="themeTitle" class="text-xl font-bold text-[#F7F5F0] mb-1.5 display-font tracking-tight">
+        {rec_name}
+      </h3>
+      <p id="themeVibes" class="text-xs text-[#8C93A8] mb-4 leading-relaxed">
+        {light_p['vibes']}
+      </p>
+
+      <!-- Live Interactive Component Row -->
+      <div class="space-y-3 pt-1">
+        <div class="flex flex-wrap gap-2.5">
+          <button id="primaryBtn" class="px-4 py-2 rounded-lg text-xs font-semibold transition-all shadow-lg active:scale-95">
+            Primary Action →
+          </button>
+          <button id="secondaryBtn" class="px-3.5 py-2 rounded-lg text-xs font-medium border transition-all">
+            Secondary Action
+          </button>
+          <span id="metricPill" class="px-3 py-2 rounded-lg text-xs font-mono font-medium border">
+            ● Telemetry Active
+          </span>
+        </div>
+
+        <!-- Metric Box -->
+        <div id="statBox" class="p-3 rounded-lg border flex items-center justify-between">
+          <div>
+            <div class="text-[11px] font-mono text-[#8C93A8]" id="statLabel">Design System Status</div>
+            <div id="statVal" class="text-xs font-bold mt-0.5">{rec_name} Active</div>
+          </div>
+          <div class="text-right">
+            <div class="text-[11px] font-mono text-[#8C93A8]">Accessibility Rating</div>
+            <div id="statSub" class="text-xs font-bold font-mono text-[#10B981]">WCAG {light_p.get('wcag_rating', 'AAA Pass')}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alternatives Column (Span 5) -->
+    <div class="md:col-span-5 flex flex-col justify-between space-y-2">
+      <div class="text-xs font-bold text-[#8C93A8] uppercase tracking-wider px-1">
+        All Category Alternatives ({cat.lower()})
+      </div>
+      {alts_html}
+    </div>
+  </div>
+
+  <script>
+    let isDarkMode = true;
+    let currentKey = 'rec';
+    const themes = {themes_json_str};
+
+    function toggleModePolarity() {{
+      isDarkMode = !isDarkMode;
+      applyTheme();
+    }}
+
+    function selectTheme(key) {{
+      currentKey = key;
+      applyTheme();
+    }}
+
+    function applyTheme() {{
+      const t = themes[currentKey];
+      const card = document.getElementById("mainPreviewCard");
+      const title = document.getElementById("themeTitle");
+      const vibes = document.getElementById("themeVibes");
+      const pBtn = document.getElementById("primaryBtn");
+      const sBtn = document.getElementById("secondaryBtn");
+      const mPill = document.getElementById("metricPill");
+      const statBox = document.getElementById("statBox");
+      const statVal = document.getElementById("statVal");
+      const statSub = document.getElementById("statSub");
+      const badge = document.getElementById("themeBadge");
+      const toggleBtn = document.getElementById("toggleBtn");
+
+      badge.textContent = t.badge + (isDarkMode ? " • DARK" : " • LIGHT");
+      title.textContent = t.title;
+      vibes.textContent = t.vibes;
+      statVal.textContent = t.statVal;
+      statSub.textContent = t.statSub;
+
+      if (isDarkMode) {{
+        card.style.backgroundColor = t.darkSurface;
+        card.style.borderColor = t.darkBorder;
+        title.style.color = "#F7F5F0";
+        vibes.style.color = "#8C93A8";
+
+        toggleBtn.style.color = "#F7F5F0";
+        toggleBtn.style.backgroundColor = "rgba(255, 255, 255, 0.08)";
+        toggleBtn.style.borderColor = "rgba(255, 255, 255, 0.18)";
+
+        badge.style.backgroundColor = t.darkAccent + "25";
+        badge.style.borderColor = t.darkAccent + "45";
+        badge.style.color = t.darkAccent;
+
+        sBtn.style.backgroundColor = "rgba(255, 255, 255, 0.06)";
+        sBtn.style.borderColor = t.darkBorder;
+        sBtn.style.color = "#F7F5F0";
+
+        pBtn.style.backgroundColor = t.darkAccent;
+        pBtn.style.color = t.darkAccentText;
+
+        mPill.style.color = t.darkSecondary;
+        mPill.style.backgroundColor = t.darkSecondary + "18";
+        mPill.style.borderColor = t.darkSecondary + "40";
+
+        statBox.style.backgroundColor = t.darkBg;
+        statBox.style.borderColor = t.darkBorder;
+        statVal.style.color = "#F7F5F0";
+      }} else {{
+        card.style.backgroundColor = t.lightSurface;
+        card.style.borderColor = t.lightBorder;
+        title.style.color = "#12151E";
+        vibes.style.color = "#565B6B";
+
+        toggleBtn.style.color = "#12151E";
+        toggleBtn.style.backgroundColor = "rgba(0, 0, 0, 0.06)";
+        toggleBtn.style.borderColor = "rgba(0, 0, 0, 0.18)";
+
+        badge.style.backgroundColor = t.lightAccent + "15";
+        badge.style.borderColor = t.lightAccent + "40";
+        badge.style.color = t.lightAccent;
+
+        sBtn.style.backgroundColor = "#F8FAFC";
+        sBtn.style.borderColor = t.lightBorder;
+        sBtn.style.color = "#12151E";
+
+        pBtn.style.backgroundColor = t.lightAccent;
+        pBtn.style.color = t.lightAccentText;
+
+        mPill.style.color = t.lightSecondary;
+        mPill.style.backgroundColor = t.lightSecondary + "18";
+        mPill.style.borderColor = t.lightSecondary + "45";
+
+        statBox.style.backgroundColor = t.lightBg;
+        statBox.style.borderColor = t.lightBorder;
+        statVal.style.color = "#12151E";
+      }}
+    }}
+
+    applyTheme();
+  </script>
+</body>
+</html>"""
+
+
 def main():
     parser = argparse.ArgumentParser(description="UI/UX Ultra v3.5 Design Engine")
     parser.add_argument("query", nargs="?", default="", help="Search keywords")
@@ -1054,6 +1297,7 @@ def main():
     parser.add_argument("--persist", action="store_true")
     parser.add_argument("--audit", action="store_true", help="Print WCAG 2.1 contrast audit breakdown")
     parser.add_argument("--svg", action="store_true", help="Output visual preview card as SVG")
+    parser.add_argument("--html", help="Path to output interactive preview HTML file")
     parser.add_argument("-p", "--project", default="Project-Ultra")
     args = parser.parse_args()
 
@@ -1123,6 +1367,15 @@ def main():
         print(generate_preview_svg(light_p, dark_p, alt_fams))
         return
 
+    if args.html:
+        html_content = generate_preview_html(light_p, dark_p, alt_fams)
+        out_dir = os.path.dirname(os.path.abspath(args.html))
+        if out_dir:
+            os.makedirs(out_dir, exist_ok=True)
+        with open(args.html, "w", encoding="utf-8") as f:
+            f.write(html_content)
+        print(f"[OK] Wrote live interactive preview HTML to {args.html}")
+
     print(json.dumps(output_data, indent=2))
 
     if args.persist:
@@ -1145,9 +1398,11 @@ def main():
             f.write(compile_theme_toggle_js())
         with open("design-system/preview.svg", "w", encoding="utf-8") as f:
             f.write(generate_preview_svg(light_p, dark_p, alt_fams))
+        with open("design-system/preview.html", "w", encoding="utf-8") as f:
+            f.write(generate_preview_html(light_p, dark_p, alt_fams))
         with open("design-system/MASTER.md", "w", encoding="utf-8") as f:
             f.write(compile_master_doc(light_p, dark_p, args.project))
-        print(f"[OK] Wrote complete design-system bundle for {fam_id} to ./design-system/ (CSS, Shadcn, Tailwind, Flutter, SwiftUI, Motion, Preview SVG)")
+        print(f"[OK] Wrote complete design-system bundle for {fam_id} to ./design-system/ (CSS, Shadcn, Tailwind, Flutter, SwiftUI, Motion, Preview SVG & HTML)")
 
 if __name__ == "__main__":
     main()
