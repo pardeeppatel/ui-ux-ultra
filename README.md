@@ -3,9 +3,11 @@
 > **Open-Source Design Intelligence Engine, UX Laws Enforcer & Multi-Platform Theme Compiler**  
 > *Crafted for Google Antigravity, Cursor, Claude Code, Windsurf, Flutter, SwiftUI & Web.*
 
+[![Live Demo: 200-Palette Studio](https://img.shields.io/badge/Live%20Demo-Studio%202.0-8A2BE2?style=for-the-badge&logo=googlechrome&logoColor=white)](https://pardeeppatel.github.io/ui-ux-ultra/)
+
 [![Version](https://img.shields.io/badge/version-1.0.0-indigo.svg)](package.json)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Palettes](https://img.shields.io/badge/palettes-200%20Curated-emerald.svg)](skill/SKILL.md)
+[![Palettes](https://img.shields.io/badge/palettes-200%20Curated-emerald.svg)](https://pardeeppatel.github.io/ui-ux-ultra/)
 [![Accessibility](https://img.shields.io/badge/WCAG%202.1-AAA%20Passed-success.svg)](skill/SKILL.md)
 [![Platforms](https://img.shields.io/badge/platforms-Web%20%7C%20Flutter%20%7C%20SwiftUI-blue.svg)](skill/SKILL.md)
 [![Credit](https://img.shields.io/badge/created%20by-Pardeep%20Kumar-orange.svg)](https://github.com/PardeepPatel)
@@ -13,9 +15,15 @@
 
 ---
 
+> 🚀 **[Click Here to Launch the Live 200-Palette Studio →](https://pardeeppatel.github.io/ui-ux-ultra/)**  
+> Test all 200 curated industry palettes live in your browser: switch between light & dark polarities, inspect real-time Bento grid layouts, compare Google Font pairings, and copy tokens with one click!
+
+---
+
 ### 🌟 Created & Maintained By
 * **Author**: **[Pardeep Kumar](https://github.com/PardeepPatel)**
 * **Powered by**: **[ToolNPlay.com](https://ToolNPlay.com)** — Free Developer Tools, AI Utilities & Productivity Engines
+* **Live Web Studio**: **[https://pardeeppatel.github.io/ui-ux-ultra/](https://pardeeppatel.github.io/ui-ux-ultra/)**
 * **GitHub Repository**: **[https://github.com/PardeepPatel/ui-ux-ultra](https://github.com/PardeepPatel/ui-ux-ultra)**
 
 ---
@@ -132,11 +140,13 @@ Once installed, your AI agent automatically activates UI/UX Ultra whenever you a
 ### B. Launching the Interactive Studio 2.0 (Browser Previewer)
 Explore all 200 curated palettes interactively with live Bento UI inspections, real-time font pairing comparisons, and one-click token copying:
 
-```bash
-npx ui-ux-ultra --preview
-# or
-npm run preview
-```
+* 🌐 **Live Web URL (Zero Installation)**: **[https://pardeeppatel.github.io/ui-ux-ultra/](https://pardeeppatel.github.io/ui-ux-ultra/)**
+* 💻 **Or run via Terminal CLI**:
+  ```bash
+  npx github:pardeeppatel/ui-ux-ultra --preview
+  # or locally:
+  npm run preview
+  ```
 
 ---
 
