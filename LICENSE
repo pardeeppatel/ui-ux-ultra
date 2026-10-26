@@ -1,21 +1,62 @@
-MIT License
+UI/UX Ultra Free-to-Use Proprietary License (Freeware & Fair-Use Agreement)
 
-Copyright (c) 2026 Pardeep Kumar (ToolNPlay.com)
+Copyright (c) 2026 Pardeep Kumar (ToolNPlay.com). All Rights Reserved.
+Website: https://ToolNPlay.com
+GitHub: https://github.com/PardeepPatel/ui-ux-ultra
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+================================================================================
+1. GRANT OF FREE LICENSE
+================================================================================
+Subject to the terms of this Agreement, the Author (Pardeep Kumar & ToolNPlay.com)
+grants to any individual or legal entity a worldwide, non-exclusive, royalty-free,
+non-transferable license to install, run, and execute this software ("UI/UX Ultra")
+free of charge for:
+  a. Personal, educational, and research projects.
+  b. Commercial software development, client projects, SaaS platforms, mobile
+     applications (Flutter, SwiftUI, React Native), and websites.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+There are NO fees, subscriptions, or royalties required to use UI/UX Ultra to
+generate design systems, stylesheets, themes, and user interfaces.
 
+================================================================================
+2. OWNERSHIP OF OUTPUT & GENERATED ASSETS
+================================================================================
+All source code, websites, mobile applications, digital products, and design assets
+that you build or generate using the tokens, styles, and palettes emitted by
+UI/UX Ultra are 100% YOUR property. You retain full and unencumbered ownership of
+all applications and products built with the assistance of this tool.
+
+================================================================================
+3. RESTRICTIONS & PROHIBITED USES (NOT OPEN SOURCE)
+================================================================================
+UI/UX Ultra is proprietary freeware. It is NOT open-source software. You expressly
+agree NOT to:
+  a. Resell, lease, sublicense, distribute, or repackage the Software, its scripts,
+     prompts, blueprints, or the 200 curated palette catalog as a standalone product,
+     commercial asset, or competing AI agent skill.
+  b. Rebrand, rename, or mirror this Software or any of its constituent files
+     under a different name or organization without prior written consent from
+     the Author.
+  c. Scrape, extract, or bulk-harvest the 200-palette design dataset, conversion
+     blueprints, or craft rules to train, benchmark, or bundle into a competing
+     design system engine or commercial API.
+  d. Remove, alter, or obscure any copyright notices, author credits (Pardeep Kumar),
+     or branding references (ToolNPlay.com) present in the Software distribution.
+
+================================================================================
+4. INTELLECTUAL PROPERTY
+================================================================================
+The Software, including all code, algorithms, documentation, curated color palettes,
+design tokens, blueprints, and trademarks, is and remains the exclusive intellectual
+property of Pardeep Kumar and ToolNPlay.com. All rights not expressly granted
+herein are reserved.
+
+================================================================================
+5. DISCLAIMER OF WARRANTIES
+================================================================================
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHOR OR TOOLNPLAY.COM BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF,
+OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
