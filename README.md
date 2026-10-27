@@ -15,6 +15,12 @@
 
 ---
 
+<p align="center">
+  <img src="assets/social-preview.png" alt="UI/UX Ultra Social Preview" width="100%" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+</p>
+
+---
+
 > 🚀 **[Click Here to Launch the Live 200-Palette Studio →](https://pardeeppatel.github.io/ui-ux-ultra/)**  
 > Test all 200 curated industry palettes live in your browser: switch between light & dark polarities, inspect real-time Bento grid layouts, compare Google Font pairings, and copy tokens with one click!
 

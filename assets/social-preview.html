@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280, height=640">
+<title>UI/UX Ultra Social Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    width: 1280px;
+    height: 640px;
+    background-color: #08090E;
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    color: #F8FAFC;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 54px 64px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Ambient Glow Gradients */
+  .glow-mesh {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1280px;
+    height: 640px;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(circle at 18% 25%, rgba(99, 102, 241, 0.22) 0%, transparent 45%),
+      radial-gradient(circle at 85% 35%, rgba(124, 58, 237, 0.25) 0%, transparent 50%),
+      radial-gradient(circle at 50% 85%, rgba(6, 182, 212, 0.15) 0%, transparent 45%),
+      radial-gradient(circle at 95% 85%, rgba(236, 72, 153, 0.12) 0%, transparent 40%);
+  }
+
+  /* Grid overlay */
+  .grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 36px 36px;
+    mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.9) 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.9) 30%, transparent 80%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .left-col {
+    position: relative;
+    z-index: 1;
+    width: 580px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .badge-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(99, 102, 241, 0.12);
+    border: 1px solid rgba(99, 102, 241, 0.35);
+    padding: 6px 14px;
+    border-radius: 9999px;
+    width: fit-content;
+    box-shadow: 0 0 20px -3px rgba(99, 102, 241, 0.3);
+  }
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #6366F1;
+    box-shadow: 0 0 10px #6366F1;
+  }
+  .badge-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #A5B4FC;
+    text-transform: uppercase;
+  }
+
+  .main-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 58px;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-top: 14px;
+    background: linear-gradient(135deg, #FFFFFF 20%, #E2E8F0 60%, #A5B4FC 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .tagline {
+    font-size: 19px;
+    font-weight: 500;
+    color: #94A3B8;
+    line-height: 1.45;
+    margin-top: 12px;
+  }
+  .tagline strong {
+    color: #F1F5F9;
+    font-weight: 600;
+  }
+
+  /* Metric counters */
+  .metrics-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .metric-card {
+    background: rgba(17, 24, 39, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+  .metric-val {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.1;
+  }
+  .metric-val.indigo { color: #818CF8; }
+  .metric-val.emerald { color: #34D399; }
+  .metric-val.cyan { color: #38BDF8; }
+  .metric-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748B;
+    margin-top: 3px;
+  }
+
+  /* Chip pills row */
+  .tech-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+  }
+  .tech-pill {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #CBD5E1;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 11px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .author-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: #64748B;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .author-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6366F1, #EC4899);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 12px;
+    color: white;
+  }
+  .author-name {
+    color: #E2E8F0;
+    font-weight: 600;
+  }
+  .author-brand {
+    color: #818CF8;
+    font-weight: 600;
+  }
+
+  /* Right Column: 3D-styled Bento Showcase */
+  .right-col {
+    position: relative;
+    z-index: 1;
+    width: 530px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .bento-showcase {
+    background: #11131A;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 
+      0 24px 50px -12px rgba(0, 0, 0, 0.8),
+      0 0 30px -4px rgba(99, 102, 241, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    position: relative;
+  }
+
+  .bento-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #222634;
+  }
+  .bento-title-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .bento-icon-box {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .bento-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #F8FAFC;
+  }
+  .bento-subtitle {
+    font-size: 11px;
+    color: #8A94A6;
+  }
+
+  .telemetry-pill {
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    padding: 4px 10px;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: #34D399;
+  }
+  .telemetry-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #10B981;
+    box-shadow: 0 0 8px #10B981;
+  }
+
+  /* Dual mode preview bars */
+  .dual-preview-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .mode-card {
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 140px;
+    border: 1px solid;
+    position: relative;
+  }
+  .mode-card.light {
+    background: #FFFFFF;
+    border-color: #E2E8F0;
+    color: #0B0F19;
+  }
+  .mode-card.dark {
+    background: #08090C;
+    border-color: #222634;
+    color: #F3F4F6;
+  }
+  .mode-badge {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 3px 7px;
+    border-radius: 5px;
+    width: fit-content;
+  }
+  .mode-card.light .mode-badge {
+    background: #F1F5F9;
+    color: #475569;
+  }
+  .mode-card.dark .mode-badge {
+    background: #1A1D27;
+    color: #8A94A6;
+  }
+
+  .mode-card-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 8px;
+  }
+  .mode-card-btn {
+    padding: 7px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+    margin-top: auto;
+  }
+  .mode-card.light .mode-card-btn {
+    background: #4F46E5;
+    color: #FFFFFF;
+    box-shadow: 0 2px 6px rgba(79, 70, 229, 0.3);
+  }
+  .mode-card.dark .mode-card-btn {
+    background: #6366F1;
+    color: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+  }
+
+  /* Color Palette Swatch Bar */
+  .swatch-bar {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid #222634;
+  }
+  .swatch-chip {
+    flex: 1;
+    height: 48px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 5px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    position: relative;
+    overflow: hidden;
+  }
+  .swatch-chip::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.35);
+  }
+
+  /* Blueprint footer pill */
+  .bento-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+    font-size: 11px;
+    color: #8A94A6;
+  }
+  .blueprint-pill {
+    background: rgba(99, 102, 241, 0.1);
+    color: #A5B4FC;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<div class="glow-mesh"></div>
+<div class="grid-bg"></div>
+
+<!-- Left Column -->
+<div class="left-col">
+  <div>
+    <div class="badge-top">
+      <span class="badge-dot"></span>
+      <span class="badge-text">v1.0.0 • Design System & Theme Compiler</span>
+    </div>
+
+    <h1 class="main-title">UI/UX Ultra</h1>
+
+    <p class="tagline">
+      200 curated <strong>dual-theme palettes</strong>, conversion blueprints &amp; UX laws for <strong>Antigravity, Cursor, Claude Code &amp; Web</strong>.
+    </p>
+
+    <div class="metrics-row">
+      <div class="metric-card">
+        <span class="metric-val indigo">200</span>
+        <span class="metric-label">Curated Palettes</span>
+      </div>
+      <div class="metric-card">
+        <span class="metric-val emerald">20</span>
+        <span class="metric-label">Industry Domains</span>
+      </div>
+      <div class="metric-card">
+        <span class="metric-val cyan">AAA</span>
+        <span class="metric-label">WCAG 2.1 Contrast</span>
+      </div>
+    </div>
+
+    <div class="tech-pills">
+      <span class="tech-pill">⚡ Tailwind CSS v4</span>
+      <span class="tech-pill">🧩 Shadcn UI</span>
+      <span class="tech-pill">📱 Flutter</span>
+      <span class="tech-pill">🍎 SwiftUI HIG</span>
+      <span class="tech-pill">📐 5-Step Blueprints</span>
+    </div>
+  </div>
+
+  <div class="author-footer">
+    <div class="author-avatar">P</div>
+    <div>
+      Created by <span class="author-name">Pardeep Kumar</span> • Powered by <span class="author-brand">ToolNPlay.com</span>
+    </div>
+  </div>
+</div>
+
+<!-- Right Column: Interactive Bento Preview -->
+<div class="right-col">
+  <div class="bento-showcase">
+    <div class="bento-header">
+      <div class="bento-title-group">
+        <div class="bento-icon-box">🎨</div>
+        <div>
+          <div class="bento-title">Linear Obsidian &amp; Indigo</div>
+          <div class="bento-subtitle">SaaS • Precision Command-Bar B2B</div>
+        </div>
+      </div>
+      <div class="telemetry-pill">
+        <span class="telemetry-dot"></span>
+        <span>19.15:1 AAA</span>
+      </div>
+    </div>
+
+    <!-- Dual Mode Comparison -->
+    <div class="dual-preview-row">
+      <div class="mode-card light">
+        <span class="mode-badge">Light Mode</span>
+        <div class="mode-card-title">Clean Daylight</div>
+        <div class="mode-card-btn">Deploy Service</div>
+      </div>
+      <div class="mode-card dark">
+        <span class="mode-badge">Dark Mode</span>
+        <div class="mode-card-title">Deep Obsidian</div>
+        <div class="mode-card-btn">Deploy Service</div>
+      </div>
+    </div>
+
+    <!-- 5 Semantic Swatches -->
+    <div class="swatch-bar">
+      <div class="swatch-chip" style="background:#4F46E5;">#4F46E5</div>
+      <div class="swatch-chip" style="background:#6366F1;">#6366F1</div>
+      <div class="swatch-chip" style="background:#0D9488;">#0D9488</div>
+      <div class="swatch-chip" style="background:#F59E0B;">#F59E0B</div>
+      <div class="swatch-chip" style="background:#11131A;">#11131A</div>
+    </div>
+
+    <div class="bento-footer">
+      <span>Conversion Architecture</span>
+      <span class="blueprint-pill">Command Hero + Bento</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
